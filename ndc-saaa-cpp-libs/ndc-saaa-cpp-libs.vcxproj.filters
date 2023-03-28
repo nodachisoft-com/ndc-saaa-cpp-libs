@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="common_header">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="src\DBTables">
+      <UniqueIdentifier>{95435d3c-e55c-4aec-b78e-42a63ba208b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map">
+      <UniqueIdentifier>{8fd89956-44d8-4afc-9d1e-db24d914f89c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\terrain">
+      <UniqueIdentifier>{4606e872-1a1b-4d4b-9beb-f593505a0477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\terrain\baselayer">
+      <UniqueIdentifier>{fd5bf490-1a47-4ce7-90d3-434bb76c6eb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="設計">
+      <UniqueIdentifier>{b5295bcb-1570-40bc-a4f8-878e23ebd6af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\dbdata">
+      <UniqueIdentifier>{afe4336b-82b6-479a-bd7f-70232f5826fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>common_header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>common_header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBTables\DBs.hpp">
+      <Filter>src\DBTables</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBTables\index.hpp">
+      <Filter>src\DBTables</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBTables\LabelsGeoEntity.hpp">
+      <Filter>src\DBTables</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map\index.hpp">
+      <Filter>src\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map\MapConfig.hpp">
+      <Filter>src\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map\MapEngine.hpp">
+      <Filter>src\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\baselayer\TerrainBaseConfig.hpp">
+      <Filter>src\terrain\baselayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\baselayer\TerrainBaseLayerGenerator.hpp">
+      <Filter>src\terrain\baselayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\baselayer\TerrainGeoLabelGenerator.hpp">
+      <Filter>src\terrain\baselayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\Biome.hpp">
+      <Filter>src\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\index.hpp">
+      <Filter>src\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\TerrainConfig.hpp">
+      <Filter>src\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\TerrainEngine.hpp">
+      <Filter>src\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\02_data\01_dev\05_ndc-cpp11-libs\aaa-modules\src\a3commonlib.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>common_header</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBTables\DBs.cpp">
+      <Filter>src\DBTables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\map\MapConfig.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\map\MapEngine.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\baselayer\TerrainBaseConfig.cpp">
+      <Filter>src\terrain\baselayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\baselayer\TerrainBaseLayerGenerator.cpp">
+      <Filter>src\terrain\baselayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\baselayer\TerrainGeoLabelGenerator.cpp">
+      <Filter>src\terrain\baselayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\TerrainConfig.cpp">
+      <Filter>src\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\TerrainEngine.cpp">
+      <Filter>src\terrain</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="spec\terrain.spec.md">
+      <Filter>設計</Filter>
+    </None>
+    <None Include="resources\dbdata\GameData.xls">
+      <Filter>リソース ファイル\dbdata</Filter>
+    </None>
+    <None Include="resources\dbdata\labels_geo.csv">
+      <Filter>リソース ファイル\dbdata</Filter>
+    </None>
+  </ItemGroup>
+</Project>

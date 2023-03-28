@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common_header">
+      <UniqueIdentifier>{c33694a5-5544-42e7-81ce-92bc8ff21ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{d3dc2c92-3540-4cba-86c1-5eb8460b1603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test_common">
+      <UniqueIdentifier>{32ea5bdf-d4a0-4cf6-af7f-a325ccd88b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DBTables">
+      <UniqueIdentifier>{b5e5f6a9-4ffc-4d04-899a-bcc18d91fd8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\terrain">
+      <UniqueIdentifier>{fc7ede5a-df88-4013-b5ab-b2f2b78320bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>common_header</Filter>
+    </ClInclude>
+    <ClInclude Include="test_common\test_util.hpp">
+      <Filter>test_common</Filter>
+    </ClInclude>
+    <ClInclude Include="test_common\index.hpp">
+      <Filter>test_common</Filter>
+    </ClInclude>
+    <ClInclude Include="test_common\test_const.hpp">
+      <Filter>test_common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>common_header</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBTables\test_DBs_succ001.cpp">
+      <Filter>src\DBTables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\test_TerrainBaseConfig_succ001.cpp">
+      <Filter>src\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\test_TerrainBaseLayerGenerator_succ001.cpp">
+      <Filter>src\terrain</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

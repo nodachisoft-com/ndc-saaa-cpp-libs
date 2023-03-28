@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{e327781c-9e52-4ea4-9da2-cde6ad18f8de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\hash">
+      <UniqueIdentifier>{d0f6cf93-7e4b-45f4-b0db-4d2a2b8ba671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dbtable">
+      <UniqueIdentifier>{d32019c6-8bcb-4a16-8f22-1a0f9e490d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cmdInvoker">
+      <UniqueIdentifier>{df4751ce-e406-4ffd-965e-a6ced4dfd843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cmdInvoker\cmd">
+      <UniqueIdentifier>{7c1d88fd-fc2f-4aa3-a958-23fc9d7fbf0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\csv">
+      <UniqueIdentifier>{742459d1-ad6f-4f3e-808e-1d40f71c314b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\exception">
+      <UniqueIdentifier>{3b3fe423-03a8-44bc-ac71-a8332607ca7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\file">
+      <UniqueIdentifier>{4edd430a-c9e3-4141-aed2-85960616a48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\geometry">
+      <UniqueIdentifier>{341339c4-2749-4bbf-a779-2cf4de78c60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\image">
+      <UniqueIdentifier>{49b501ce-9ac6-40f8-a0d0-d7618d5f6980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\log">
+      <UniqueIdentifier>{e43e32e5-ebb9-4650-b4bf-5d2c2acb6aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math">
+      <UniqueIdentifier>{e49c6f03-d4c0-4024-a18c-9701170bb444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\memory_bank">
+      <UniqueIdentifier>{5c23597d-3804-4e79-bf38-93f851411778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\noise">
+      <UniqueIdentifier>{b498fad7-e065-4be8-b180-38c4d6b547e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\random">
+      <UniqueIdentifier>{50851c2c-6626-47e0-9fdf-58e38c7dbac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\serializable">
+      <UniqueIdentifier>{45151029-783d-46b1-b4c8-9c6c685202a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\timewatch">
+      <UniqueIdentifier>{bae8dd8f-423f-4f18-8245-e3ce7eeab3a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{8ae7b7c8-6313-4dcd-9487-9fa8c2c070c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\hash\Crc32.hpp">
+      <Filter>src\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hash\index.hpp">
+      <Filter>src\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ndclibs.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cmdInvoker\cmd\CmdBase.hpp">
+      <Filter>src\cmdInvoker\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cmdInvoker\CmdTransferForThread.hpp">
+      <Filter>src\cmdInvoker</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dbtable\index.hpp">
+      <Filter>src\dbtable</Filter>
+    </ClInclude>
+    <ClInclude Include="src\csv\CSVReader.hpp">
+      <Filter>src\csv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dbtable\DBTable.hpp">
+      <Filter>src\dbtable</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dbtable\EntityBase.hpp">
+      <Filter>src\dbtable</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cmdInvoker\index.hpp">
+      <Filter>src\cmdInvoker</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cmdInvoker\cmd\index.hpp">
+      <Filter>src\cmdInvoker\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cmdInvoker\cmd\ExitForceCmd.hpp">
+      <Filter>src\cmdInvoker\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exception\index.hpp">
+      <Filter>src\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\ILogAppender.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\Logger.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\LOGLEVEL.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\LogMgr.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\LogStream.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\StdOutLogAppender.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\index.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\ftrig.hpp">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\fsqrt.hpp">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\index.hpp">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exception\NdcBaseException.hpp">
+      <Filter>src\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="src\random\index.hpp">
+      <Filter>src\random</Filter>
+    </ClInclude>
+    <ClInclude Include="src\random\MtRandomizer.hpp">
+      <Filter>src\random</Filter>
+    </ClInclude>
+    <ClInclude Include="src\random\WeightRandom.hpp">
+      <Filter>src\random</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\index.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\ArrayUtil.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\StringUtil.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\ValidationUtil.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\csv\index.hpp">
+      <Filter>src\csv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\LogHistory.hpp">
+      <Filter>src\log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\file\FileAccessMgr.hpp">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="src\file\FileAccessor.hpp">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="src\file\FileApiConvert.hpp">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="src\file\index.hpp">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="src\timewatch\index.hpp">
+      <Filter>src\timewatch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\timewatch\ScheduleTask.hpp">
+      <Filter>src\timewatch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\timewatch\TimeWatch.hpp">
+      <Filter>src\timewatch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\BitmapImage.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\DebugFontData.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\index.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\memory_bank\index.hpp">
+      <Filter>src\memory_bank</Filter>
+    </ClInclude>
+    <ClInclude Include="src\memory_bank\Memory1d.hpp">
+      <Filter>src\memory_bank</Filter>
+    </ClInclude>
+    <ClInclude Include="src\memory_bank\Memory2d.hpp">
+      <Filter>src\memory_bank</Filter>
+    </ClInclude>
+    <ClInclude Include="src\memory_bank\Memory3d.hpp">
+      <Filter>src\memory_bank</Filter>
+    </ClInclude>
+    <ClInclude Include="src\memory_bank\MemoryBank.hpp">
+      <Filter>src\memory_bank</Filter>
+    </ClInclude>
+    <ClInclude Include="src\noise\EdgeNoiseCurveFilter.hpp">
+      <Filter>src\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="src\noise\index.hpp">
+      <Filter>src\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="src\noise\NdcNoisedEdgeVoronoi.hpp">
+      <Filter>src\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="src\noise\NdcVoronoi.hpp">
+      <Filter>src\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="src\noise\PerlinNoise1234.hpp">
+      <Filter>src\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="src\serializable\index.hpp">
+      <Filter>src\serializable</Filter>
+    </ClInclude>
+    <ClInclude Include="src\serializable\ISerializable.hpp">
+      <Filter>src\serializable</Filter>
+    </ClInclude>
+    <ClInclude Include="src\serializable\SerializeBuffer.hpp">
+      <Filter>src\serializable</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\GeoCollision.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\index.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\LineSegment2d.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\Point2d.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\Rectangle2d.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\Size2d.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\Vector2d.hpp">
+      <Filter>src\geometry</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\hash\Crc32.cpp">
+      <Filter>src\hash</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cmdInvoker\CmdTransferForThread.cpp">
+      <Filter>src\cmdInvoker</Filter>
+    </ClCompile>
+    <ClCompile Include="src\csv\CSVReader.cpp">
+      <Filter>src\csv</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cmdInvoker\cmd\ExitForceCmd.cpp">
+      <Filter>src\cmdInvoker\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="src\log\Logger.cpp">
+      <Filter>src\log</Filter>
+    </ClCompile>
+    <ClCompile Include="src\log\LogMgr.cpp">
+      <Filter>src\log</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\fsqrt.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\ftrig.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exception\NdcBaseException.cpp">
+      <Filter>src\exception</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random\MtRandomizer.cpp">
+      <Filter>src\random</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random\WeightRandom.cpp">
+      <Filter>src\random</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file\FileAccessMgr.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file\FileAccessor.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file\FileApiConvert.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="src\timewatch\ScheduleTask.cpp">
+      <Filter>src\timewatch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\timewatch\TimeWatch.cpp">
+      <Filter>src\timewatch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image\BitmapImage.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image\DebugFontData.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory_bank\MemoryBank.cpp">
+      <Filter>src\memory_bank</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\EdgeNoiseCurveFilter.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\NdcNoisedEdgeVoronoi.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\NdcVoronoi.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\PerlinNoise1234.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\serializable\SerializeBuffer.cpp">
+      <Filter>src\serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\GeoCollision.cpp">
+      <Filter>src\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Rectangle2d.cpp">
+      <Filter>src\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Vector2d.cpp">
+      <Filter>src\geometry</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

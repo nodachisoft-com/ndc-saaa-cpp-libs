@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>common_header</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hash\test_crc32_succ_001.cpp">
+      <Filter>src\hash</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cmdInvoker\test_CmdTransferForThread_succ_001.cpp">
+      <Filter>src\cmdInvoker</Filter>
+    </ClCompile>
+    <ClCompile Include="src\csv\test_CSVReader_succ_001.cpp">
+      <Filter>src\csv</Filter>
+    </ClCompile>
+    <ClCompile Include="src\timewatch\test_scheduletask_succ_001.cpp">
+      <Filter>src\timewatch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\timewatch\test_timewatch_succ_001.cpp">
+      <Filter>src\timewatch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\log\test_logger_succ_001.cpp">
+      <Filter>src\log</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dbtable\test_DBTable_succ_001.cpp">
+      <Filter>src\dbtable</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\test_fsqrt_succ_001.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\test_ftrig_succ_001.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random\test_mt_succ_001.cpp">
+      <Filter>src\random</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random\test_WeightRandom_succ_001.cpp">
+      <Filter>src\random</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file\test_FileAccessor_succ_001.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file\test_file_access_mgr_succ_001.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory_bank\test_Memory1d_fail_001.cpp">
+      <Filter>src\memory_bank</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory_bank\test_Memory1d_succ_001.cpp">
+      <Filter>src\memory_bank</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory_bank\test_MemoryBank_succ_001.cpp">
+      <Filter>src\memory_bank</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image\test_bmp_debugfont_succ_001.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image\test_bmp_succ_001.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\test_EdgeNoiseCurveFilter_succ_001.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\test_NdcNoisedEdgeVoronoi_succ_001.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\test_NdcVoronoi_succ_001.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noise\test_PerlinNoise1234_succ_001.cpp">
+      <Filter>src\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\test_geometry_succ_001.cpp">
+      <Filter>src\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\test_Rectangle2d_succ_003.cpp">
+      <Filter>src\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\test_vector2d_succ_002.cpp">
+      <Filter>src\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\test_ArrayUtil_succ_001.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\test_StringUtil_succ_001.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common_header">
+      <UniqueIdentifier>{916f2bf8-1d14-436f-ae55-c2d59ac8e875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{9810cf34-20fd-4f6e-b0a8-63ebeb74b7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\hash">
+      <UniqueIdentifier>{4b9fd266-2df9-427b-9530-c833d64b9cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cmdInvoker">
+      <UniqueIdentifier>{bec12c5b-a2b4-4063-92cc-eaedaa73a84a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\csv">
+      <UniqueIdentifier>{0a6d649d-0ab6-41f4-b4be-f801649ea332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math">
+      <UniqueIdentifier>{f1ec4dcf-412f-4c88-811c-23b0578b1545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\timewatch">
+      <UniqueIdentifier>{ba3a2b1d-9e16-4764-8ac6-1d412c34f00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\log">
+      <UniqueIdentifier>{d08f5f19-c158-44ec-9734-e6462efd3e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\noise">
+      <UniqueIdentifier>{4d6ebb23-82ba-40de-9920-31c794bfd180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dbtable">
+      <UniqueIdentifier>{58686d46-0700-4f07-85dd-8933804386b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\random">
+      <UniqueIdentifier>{c8d2dbc0-ff9f-44cc-93cf-d66e00436083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\file">
+      <UniqueIdentifier>{a03e232a-8d6a-4305-a8d8-009475fc3ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\memory_bank">
+      <UniqueIdentifier>{8b69111e-a821-40dc-8714-6e86fd5660d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\image">
+      <UniqueIdentifier>{6947e9ec-a3f5-4634-95d9-fc15da680fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\geometry">
+      <UniqueIdentifier>{50e2176e-5620-43d6-9ec6-43a39d1d743c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{6900d4c8-a67e-401e-940b-c429d92e4c86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>common_header</Filter>
+    </ClInclude>
+    <ClInclude Include="testcommon.hpp">
+      <Filter>common_header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
