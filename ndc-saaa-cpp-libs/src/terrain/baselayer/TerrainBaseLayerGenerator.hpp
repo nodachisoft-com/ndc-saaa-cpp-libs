@@ -11,6 +11,10 @@ using namespace nl;
 
 namespace a3c
 {
+  /// @brief 
+  ///  地理データで乱数から生成される基礎データ（Height Field、Biome）を生成する。
+  ///  １．大域用データとして２次元データを生成し、キャッシュしておく
+  ///  ２．ピンポイントな指定の位置のデータを取得する API を公開する
   class TerrainBaseLayerGenerator
   {
   private:
@@ -65,6 +69,7 @@ namespace a3c
     // 基本的な HeightField、Biome 情報を生成する
     void generateBaseTerrain();
 
+    /// @brief 指定したマップチップをメートル単位でピンポイントに指定して高さを取得する
     float getWorldmapchipHf(const float u, const float v);
 
   private:

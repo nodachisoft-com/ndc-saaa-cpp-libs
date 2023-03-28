@@ -58,7 +58,7 @@ float TerrainBaseLayerGenerator::getLayerHfAsWorldmapchip_StrategyLevel(const fl
       layer4noisePointX, layer4noisePointY, 255.0f);
   float hBase = res1 * 0.5f + res2 * 0.3f + res3 * 0.15f + res4 * 0.05f;
 
-  // 外洋を作成
+  // Edge Filter を使って外洋を作成
   float edgeFilterFix = edgeFileter.pos2(
       u / wholeMapchipSizeWidth,
       v / wholeMapchipSizeHeight);
