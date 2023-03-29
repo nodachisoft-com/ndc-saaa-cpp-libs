@@ -2,7 +2,7 @@
 
 using namespace a3c;
 
-TerrainConfig::TerrainConfig()
+TerrainConfig::TerrainConfig(): Seed(0)
 {
   terrainBaseConfig = TerrainBaseConfig();
 };
