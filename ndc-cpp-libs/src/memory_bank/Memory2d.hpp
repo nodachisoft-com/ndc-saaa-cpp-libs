@@ -36,6 +36,7 @@ namespace nl
     Memory2d()
         : isInit(false)
     {
+      resizeMemory(1, 1);
     }
 
     Memory2d(const int _width, const int _height, const T initialValue)

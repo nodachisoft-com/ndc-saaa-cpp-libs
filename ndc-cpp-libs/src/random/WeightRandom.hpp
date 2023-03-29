@@ -57,7 +57,7 @@ namespace nl
 
     /// @brief 重みづけオブジェクトリストの長さ
     /// @return 長さ
-    int length()
+    size_t length()
     {
       return list.size();
     }
@@ -67,8 +67,8 @@ namespace nl
     float getSumRandomPerc()
     {
       float sum = 0.0f;
-      int len = length();
-      for (int i = 0; i < len; i++)
+      size_t len = length();
+      for (size_t i = 0; i < len; i++)
       {
         Elem e = list.at(i);
         sum += e.perc;
@@ -80,10 +80,10 @@ namespace nl
     /// @return ランダムで取得したオブジェクト
     T getRandElem()
     {
-      int len = length();
+      size_t len = length();
       float rndTarget = rand.getRndFloat(0.0f, getSumRandomPerc());
       float countRndSum = 0.0f;
-      for (int i = 0; i < len; i++)
+      for (size_t i = 0; i < len; i++)
       {
         Elem e = list.at(i);
         if (countRndSum <= rndTarget && rndTarget < countRndSum + e.perc)
