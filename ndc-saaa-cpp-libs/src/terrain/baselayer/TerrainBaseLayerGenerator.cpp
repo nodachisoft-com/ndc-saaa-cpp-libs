@@ -18,7 +18,7 @@ void TerrainBaseLayerGenerator::generateBaseTerrain()
   // Map の最もベースとなる基本的な Height Field を作成する
   generateStrategyMapHF();
 
-  // Strategy レベルで BiomeNo 割り振りデータを生成する
+  // Strategy レベルで Voronoi ベースで BiomeNo 色分け２次元データを生成する
   generateStrategyMapBiomType();
 
   // Map 上で一定以上の Biome サイズに対してユニークな ID および名称を割り振る
@@ -313,6 +313,13 @@ void TerrainBaseLayerGenerator::generateStrategyMapBiomeId()
       biomeIdCount++;
     }
   }
+}
+
+
+void TerrainBaseLayerGenerator::generateNamedPlaceNetwork()
+{
+
+
 }
 
 void TerrainBaseLayerGenerator::init(TerrainBaseConfig _conf, DBs &_dbRef)

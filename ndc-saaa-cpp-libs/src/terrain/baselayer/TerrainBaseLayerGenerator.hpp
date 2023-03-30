@@ -56,6 +56,8 @@ namespace a3c
     /// @brief 一定の面積以上のラベルをもつ Biome を記録する
     std::vector<Biome> biomeList;
 
+    //std::vector<
+
   public:
     TerrainBaseLayerGenerator();
     ~TerrainBaseLayerGenerator();
@@ -66,8 +68,14 @@ namespace a3c
     /// @param conf マップ生成に必要な情報
     void init(TerrainBaseConfig conf, DBs &dbRef);
 
-    // 基本的な HeightField、Biome 情報を生成する
+    /// @brief
+    ///  基本的な HeightField、Biome、Named Place 情報を生成する
+    ///  1) generateStrategyMapHF();       … HF 作成
+    ///  2) generateStrategyMapBiomType(); … Voronoi ベースで BiomeNo 色分け２次元データを生成
+    ///  3) generateStrategyMapBiomeId();  … 一定以上の領域をもつ Biome にユニークID割り当て
+    ///  4) generateNamedPlaceNetwork();   … 名前付き場所ノードと NW を形成
     void generateBaseTerrain();
+
 
     /// @brief 指定したマップチップをメートル単位でピンポイントに指定して高さを取得する
     float getWorldmapchipHf(const float u, const float v);
@@ -95,6 +103,9 @@ namespace a3c
 
     /// @brief Biome 領域ごとのユニークな ID を識別し、領域などの特性を記録する
     void generateStrategyMapBiomeId();
+
+    /// @brief Biome 領域の中心点にて、名前付き場所ノードを作成しノード同士を接続する
+    void generateNamedPlaceNetwork();
 
   public:
     // ============= アクセサメソッド ===============

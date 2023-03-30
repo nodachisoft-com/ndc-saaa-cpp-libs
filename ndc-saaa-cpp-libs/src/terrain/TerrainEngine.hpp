@@ -13,7 +13,7 @@ namespace a3c
     DBs *dbRef;
 
     /// @brief BaseLayer 生成用エンジン
-    TerrainBaseLayerGenerator baseLayerGen;
+    TerrainBaseLayerGenerator terrainBaseLayerGen;
 
     /// @brief インスタンス初期化済みフラグ
     bool _initialized;
@@ -34,7 +34,7 @@ namespace a3c
   public: // ==== アクセサメソッド ====
     TerrainBaseLayerGenerator *getBaseLayerGenerator()
     {
-      return &baseLayerGen;
+      return &terrainBaseLayerGen;
     }
   };
 }

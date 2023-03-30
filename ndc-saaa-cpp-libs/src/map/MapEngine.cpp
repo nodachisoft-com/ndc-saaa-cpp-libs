@@ -23,5 +23,5 @@ void MapEngine::generateNewWorld()
   terrainEngine.generateNewBaseLayer();
 
   // TODO: Voronoi ベースの NamedPlace の取得を行い、経路を作成する
-
+  
 }

@@ -15,12 +15,16 @@ void TerrainEngine::init(const TerrainConfig _terrainConfig, DBs &_dbRef)
   dbRef = &_dbRef;
 
   // TerrainBaseLayerGenerator を初期化
-  baseLayerGen.init(terrainConfig.terrainBaseConfig, _dbRef);
+  terrainBaseLayerGen.init(terrainConfig.terrainBaseConfig, _dbRef);
   _initialized = true; // 初期化済みフラグをたてる
 }
 
 void TerrainEngine::generateNewBaseLayer()
 {
-  // BaseLayer の HF、Biome、NamedPlace のポイントを生成する
-  baseLayerGen.generateBaseTerrain();
+  // BaseLayer の HF、Biome のポイントを生成する
+  terrainBaseLayerGen.generateBaseTerrain();
+
+  // NamedPlace ポイント作成
+
+
 }

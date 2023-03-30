@@ -150,6 +150,7 @@
     <ClInclude Include="src\map\index.hpp" />
     <ClInclude Include="src\map\MapConfig.hpp" />
     <ClInclude Include="src\map\MapEngine.hpp" />
+    <ClInclude Include="src\terrain\baselayer\namedplace\NamedPlaceNode.hpp" />
     <ClInclude Include="src\terrain\baselayer\TerrainBaseConfig.hpp" />
     <ClInclude Include="src\terrain\baselayer\TerrainBaseLayerGenerator.hpp" />
     <ClInclude Include="src\terrain\baselayer\TerrainGeoLabelGenerator.hpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="src\DBTables\DBs.cpp" />
     <ClCompile Include="src\map\MapConfig.cpp" />
     <ClCompile Include="src\map\MapEngine.cpp" />
+    <ClCompile Include="src\terrain\baselayer\namedplace\NamedPlaceNode.cpp" />
     <ClCompile Include="src\terrain\baselayer\TerrainBaseConfig.cpp" />
     <ClCompile Include="src\terrain\baselayer\TerrainBaseLayerGenerator.cpp" />
     <ClCompile Include="src\terrain\baselayer\TerrainGeoLabelGenerator.cpp" />

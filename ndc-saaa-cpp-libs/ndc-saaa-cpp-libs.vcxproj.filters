@@ -31,6 +31,9 @@
     <Filter Include="リソース ファイル\dbdata">
       <UniqueIdentifier>{afe4336b-82b6-479a-bd7f-70232f5826fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\terrain\baselayer\namedplace">
+      <UniqueIdentifier>{e04bfb1c-b011-4a4b-8991-88aff2a268e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -81,6 +84,9 @@
     <ClInclude Include="..\..\..\..\..\..\02_data\01_dev\05_ndc-cpp11-libs\aaa-modules\src\a3commonlib.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\terrain\baselayer\namedplace\NamedPlaceNode.hpp">
+      <Filter>src\terrain\baselayer\namedplace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -109,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="src\terrain\TerrainEngine.cpp">
       <Filter>src\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\baselayer\namedplace\NamedPlaceNode.cpp">
+      <Filter>src\terrain\baselayer\namedplace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
