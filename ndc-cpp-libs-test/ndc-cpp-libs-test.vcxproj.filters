@@ -85,6 +85,9 @@
     <ClCompile Include="src\util\test_StringUtil_succ_001.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
+    <ClCompile Include="src\memory_bank\test_Memory2d_succ_001.cpp">
+      <Filter>src\memory_bank</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

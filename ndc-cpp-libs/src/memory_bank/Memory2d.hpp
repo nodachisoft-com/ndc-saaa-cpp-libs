@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <memory>
 #include "../exception/index.hpp"
+#include "../hash/Crc32.hpp"
 
 namespace nl
 {
@@ -44,6 +45,7 @@ namespace nl
     {
       init(_width, _height, initialValue);
     }
+
     bool init(const int _width, const int _height, const T initialValue)
     {
       resizeMemory(_width, _height);
@@ -105,6 +107,23 @@ namespace nl
     {
       return height;
     }
+
+    /// @brief CRC32 の計算
+    /// @return CRC32 の計算結果
+    unsigned long calcCrc32()
+    {
+      size_t objSize = sizeof(T);
+      int bufSize = size();
+      Crc32 crc;
+      for (int index = 0; index < bufSize; index++) {
+        unsigned char* byteArray = (unsigned char*)(void*)&buf[index];
+        for (int objIndex = 0; objIndex < objSize; objIndex++) {
+          crc.calcUpdate(byteArray[objIndex]);
+        }
+      }
+      return crc.getHash();
+    }
+
 
     void setOutOfRangeData(const T t)
     {
@@ -233,14 +252,15 @@ namespace nl
       }
     }
 
-    /// @brief TODO: copyTo で引数内容を直接編集するのではなく、
-    ///   スマートポインタで new した結果を返すのが望ましい。
+    /// @brief
+    ///   [fromX,fromY]-(toX,toY) の範囲を新しい Memory2d オブジェクトで返す
+    ///   from は範囲に含むが、to は範囲に含まない
     /// @param from
     /// @param to
     /// @param copyTo
     std::shared_ptr<Memory2d<T>> getCopyRange(const int fromX, const int fromY, const int toX, const int toY)
     {
-      if ((0 > fromX || width <= toX || fromX > toX) || (0 > fromY || height <= toY || fromY > toY))
+      if ((0 > fromX || width < toX || fromX > toX) || (0 > fromY || height < toY || fromY > toY))
       {
         // コピー元が範囲外である
         std::string msg(typeid(*this).name());
@@ -249,8 +269,8 @@ namespace nl
       }
 
       // コピーするサイズ
-      int newWidth = toX - fromX;
-      int newHeight = toY - fromY;
+      int newWidth = toX - fromX + 1;
+      int newHeight = toY - fromY + 1;
 
       // コピー先のインスタンスを生成
       std::shared_ptr<Memory2d<T>> newMem(new Memory2d<T>(newWidth, newHeight, initialData));

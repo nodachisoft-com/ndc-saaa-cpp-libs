@@ -3,6 +3,7 @@
 #include <ndclibs.hpp>
 #include "TerrainConfig.hpp"
 #include "baselayer/TerrainBaseLayerGenerator.hpp"
+#include "locationnetwork/NamedLocationMgr.hpp"
 
 namespace a3c
 {
@@ -14,6 +15,9 @@ namespace a3c
 
     /// @brief BaseLayer 生成用エンジン
     TerrainBaseLayerGenerator terrainBaseLayerGen;
+
+    /// @brief 名前付き場所管理クラス
+    NamedLocationMgr namedLocationMgr;
 
     /// @brief インスタンス初期化済みフラグ
     bool _initialized;
@@ -36,5 +40,12 @@ namespace a3c
     {
       return &terrainBaseLayerGen;
     }
+
+    // 名前付き場所の管理クラスへの参照を取得
+    NamedLocationMgr* getNamedLocationMgr()
+    {
+      return &namedLocationMgr;
+    }
+
   };
 }

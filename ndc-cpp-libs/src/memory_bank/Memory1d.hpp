@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <memory>
 #include "../exception/index.hpp"
+#include "../hash/Crc32.hpp"
 
 namespace nl
 {
@@ -64,6 +65,22 @@ namespace nl
     int size()
     {
       return width;
+    }
+
+    /// @brief CRC32 の計算
+    /// @return CRC32 の計算結果
+    unsigned long calcCrc32()
+    {
+      size_t objSize = sizeof(T);
+      int bufSize = size();
+      Crc32 crc;
+      for (int index = 0; index < bufSize; index++) {
+        unsigned char* byteArray = (unsigned char*)(void*)&buf[index];
+        for (int objIndex = 0; objIndex < objSize; objIndex++) {
+          crc.calcUpdate(byteArray[objIndex]);
+        }
+      }
+      return crc.getHash();
     }
 
     void setOutOfRangeData(const T t)
@@ -186,14 +203,13 @@ namespace nl
       }
     }
 
-    /// @brief TODO: copyTo で引数内容を直接編集するのではなく、
-    ///   スマートポインタで new した結果を返すのが望ましい。
+    /// @brief [from,to) の範囲でコピーする
     /// @param from
     /// @param to
     /// @param copyTo
     std::shared_ptr<Memory1d<T>> getCopyRange(const int from, const int to)
     {
-      if (0 > from || width <= to || from > to)
+      if (0 > from || width < to || from > to)
       {
         // コピー元が範囲外である
         std::string msg(typeid(*this).name());
@@ -202,7 +218,7 @@ namespace nl
       }
 
       // コピーするサイズ
-      int newWidth = to - from;
+      int newWidth = to - from + 1;
       std::shared_ptr<Memory1d<T>> newMem(new Memory1d<T>(newWidth, initialData));
       for (int i = 0; i < newWidth; i++)
       {

@@ -318,7 +318,10 @@ void TerrainBaseLayerGenerator::generateStrategyMapBiomeId()
 
 void TerrainBaseLayerGenerator::generateNamedPlaceNetwork()
 {
+  for (Biome biom : biomeList) {
+    
 
+  }
 
 }
 

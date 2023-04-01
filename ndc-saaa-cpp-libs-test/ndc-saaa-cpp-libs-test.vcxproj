@@ -46,8 +46,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\DBTables\test_DBs_succ001.cpp" />
+    <ClCompile Include="src\terrain\locationnetwork\test_NamedLocationMgr_succ001.cpp" />
     <ClCompile Include="src\terrain\test_TerrainBaseConfig_succ001.cpp" />
     <ClCompile Include="src\terrain\test_TerrainBaseLayerGenerator_succ001.cpp" />
+    <ClCompile Include="src\terrain\test_TerrainEngine_succ001.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ndc-saaa-cpp-libs\ndc-saaa-cpp-libs.vcxproj">

@@ -8,7 +8,7 @@ namespace a3c
 {
   /// @brief
   ///  名前付き場所のノードデータを生成する
-  class NamedPlaceNode
+  class NamedLocationEdge
   {
   private:
 
@@ -32,8 +32,7 @@ namespace a3c
 
   public:
     // コンストラクタ
-    NamedPlaceNode(int refBiomeNo, Point2d centerPos, std::string labelName)
-      : refBiomeNo(refBiomeNo), centerPos(centerPos), labelName(labelName)
+    NamedLocationEdge()
     {
     }
 

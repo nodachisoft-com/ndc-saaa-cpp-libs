@@ -104,6 +104,24 @@ namespace nl
       return depth;
     }
 
+
+    /// @brief CRC32 の計算
+    /// @return CRC32 の計算結果
+    unsigned long calcCrc32()
+    {
+      size_t objSize = sizeof(T);
+      int bufSize = size();
+      Crc32 crc;
+      for (int index = 0; index < bufSize; index++) {
+        unsigned char* byteArray = (unsigned char*)(void*)&buf[index];
+        for (int objIndex = 0; objIndex < objSize; objIndex++) {
+          crc.calcUpdate(byteArray[objIndex]);
+        }
+      }
+      return crc.getHash();
+    }
+
+
     void setOutOfRangeData(const T t)
     {
       outOfRangeData = t;
@@ -244,7 +262,7 @@ namespace nl
     /// @param copyTo
     std::shared_ptr<Memory3d<T>> getCopyRange(const int fromX, const int fromY, const int fromZ, const int toX, const int toY, const int toZ)
     {
-      if ((0 > fromX || width <= toX || fromX > toX) || (0 > fromY || height <= toY || fromY > toY) || (0 > fromZ || depth <= toZ || fromZ > toZ))
+      if ((0 > fromX || width < toX || fromX > toX) || (0 > fromY || height < toY || fromY > toY) || (0 > fromZ || depth < toZ || fromZ > toZ))
       {
         // コピー元が範囲外である
         std::string msg(typeid(*this).name());
@@ -253,9 +271,9 @@ namespace nl
       }
 
       // コピーするサイズ
-      int newWidth = toX - fromX;
-      int newHeight = toY - fromY;
-      int newDepth = toZ - fromZ;
+      int newWidth = toX - fromX + 1;
+      int newHeight = toY - fromY + 1;
+      int newDepth = toZ - fromZ + 1;
 
       // コピー先のインスタンスを生成
       std::shared_ptr<Memory3d<T>> newMem(new Memory3d<T>(newWidth, newHeight, newDepth, initialData));

@@ -31,8 +31,8 @@
     <Filter Include="リソース ファイル\dbdata">
       <UniqueIdentifier>{afe4336b-82b6-479a-bd7f-70232f5826fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\terrain\baselayer\namedplace">
-      <UniqueIdentifier>{e04bfb1c-b011-4a4b-8991-88aff2a268e6}</UniqueIdentifier>
+    <Filter Include="src\terrain\locationnetwork">
+      <UniqueIdentifier>{96f82456-c890-401a-9044-b1e67bc0d114}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,8 +84,20 @@
     <ClInclude Include="..\..\..\..\..\..\02_data\01_dev\05_ndc-cpp11-libs\aaa-modules\src\a3commonlib.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\terrain\baselayer\namedplace\NamedPlaceNode.hpp">
-      <Filter>src\terrain\baselayer\namedplace</Filter>
+    <ClInclude Include="src\terrain\locationnetwork\index.hpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationEdge.hpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationMgr.hpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationNode.hpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationRouteGuide.hpp">
+      <Filter>src\terrain\locationnetwork</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,8 +128,17 @@
     <ClCompile Include="src\terrain\TerrainEngine.cpp">
       <Filter>src\terrain</Filter>
     </ClCompile>
-    <ClCompile Include="src\terrain\baselayer\namedplace\NamedPlaceNode.cpp">
-      <Filter>src\terrain\baselayer\namedplace</Filter>
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationEdge.cpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationMgr.cpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationNode.cpp">
+      <Filter>src\terrain\locationnetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationRouteGuide.cpp">
+      <Filter>src\terrain\locationnetwork</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

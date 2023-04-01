@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -150,12 +150,16 @@
     <ClInclude Include="src\map\index.hpp" />
     <ClInclude Include="src\map\MapConfig.hpp" />
     <ClInclude Include="src\map\MapEngine.hpp" />
-    <ClInclude Include="src\terrain\baselayer\namedplace\NamedPlaceNode.hpp" />
     <ClInclude Include="src\terrain\baselayer\TerrainBaseConfig.hpp" />
     <ClInclude Include="src\terrain\baselayer\TerrainBaseLayerGenerator.hpp" />
     <ClInclude Include="src\terrain\baselayer\TerrainGeoLabelGenerator.hpp" />
     <ClInclude Include="src\terrain\Biome.hpp" />
     <ClInclude Include="src\terrain\index.hpp" />
+    <ClInclude Include="src\terrain\locationnetwork\index.hpp" />
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationEdge.hpp" />
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationMgr.hpp" />
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationNode.hpp" />
+    <ClInclude Include="src\terrain\locationnetwork\NamedLocationRouteGuide.hpp" />
     <ClInclude Include="src\terrain\TerrainConfig.hpp" />
     <ClInclude Include="src\terrain\TerrainEngine.hpp" />
   </ItemGroup>
@@ -169,10 +173,13 @@
     <ClCompile Include="src\DBTables\DBs.cpp" />
     <ClCompile Include="src\map\MapConfig.cpp" />
     <ClCompile Include="src\map\MapEngine.cpp" />
-    <ClCompile Include="src\terrain\baselayer\namedplace\NamedPlaceNode.cpp" />
     <ClCompile Include="src\terrain\baselayer\TerrainBaseConfig.cpp" />
     <ClCompile Include="src\terrain\baselayer\TerrainBaseLayerGenerator.cpp" />
     <ClCompile Include="src\terrain\baselayer\TerrainGeoLabelGenerator.cpp" />
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationEdge.cpp" />
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationMgr.cpp" />
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationNode.cpp" />
+    <ClCompile Include="src\terrain\locationnetwork\NamedLocationRouteGuide.cpp" />
     <ClCompile Include="src\terrain\TerrainConfig.cpp" />
     <ClCompile Include="src\terrain\TerrainEngine.cpp" />
   </ItemGroup>

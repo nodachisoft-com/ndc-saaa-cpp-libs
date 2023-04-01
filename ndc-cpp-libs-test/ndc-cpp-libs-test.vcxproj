@@ -59,6 +59,7 @@
     <ClCompile Include="src\math\test_ftrig_succ_001.cpp" />
     <ClCompile Include="src\memory_bank\test_Memory1d_fail_001.cpp" />
     <ClCompile Include="src\memory_bank\test_Memory1d_succ_001.cpp" />
+    <ClCompile Include="src\memory_bank\test_Memory2d_succ_001.cpp" />
     <ClCompile Include="src\memory_bank\test_MemoryBank_succ_001.cpp" />
     <ClCompile Include="src\noise\test_EdgeNoiseCurveFilter_succ_001.cpp" />
     <ClCompile Include="src\noise\test_NdcNoisedEdgeVoronoi_succ_001.cpp" />
