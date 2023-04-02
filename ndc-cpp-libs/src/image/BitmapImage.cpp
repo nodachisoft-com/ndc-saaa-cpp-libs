@@ -20,15 +20,12 @@ BitmapImage::BitmapImage(const int width, const int height)
 {
   imgp = new ImageCanvas(width, height);
   metainfo.setSize(width, height);
-  imgp->data = (ColorRGB *)calloc(width * height, sizeof(ColorRGB));
 }
 
 BitmapImage::~BitmapImage()
 {
   // 画像本体データを解放する
-  free(imgp->data);
-  imgp->data = nullptr;
-
+  delete imgp;
   if (fontImage != nullptr)
   {
     // フォントデータ読み込み済みなら解放する
@@ -78,12 +75,11 @@ void BitmapImage::ReadBmp(const char *filename)
   }
   metainfo.setSize(width, height);
 
-  if (imgp->data != nullptr)
-  {
-    // 前回のバッファが存在する場合は解放
-    free(imgp->data);
-  }
-  imgp->data = (ColorRGB *)malloc(sizeof(ColorRGB) * width * height);
+  // キャンバスの削除
+  delete imgp;
+
+  // キャンバスの再確保
+  imgp = new ImageCanvas( width, height );
 
   memcpy(&Bmp_color, Bmp_headbuf + 28, sizeof(Bmp_color));
   if (Bmp_color != 24)
@@ -145,9 +141,8 @@ void BitmapImage::WriteBmp(const char *filename)
   int Bmp_info_header_size = 40;
   int Bmp_planes = 1;
 
-  // int real_width = imgp.width * 3 + imgp.width % 4; // 4byte 境界にあわせるために実際の幅の計算
-  int real_width = // metainfo.Bmp_width * 3 + metainfo.Bmp_width % 4;
-    metainfo.calcRealImagefileWidth();
+  // 4byte 境界にあわせるために実際の幅の計算
+  int real_width = metainfo.calcRealImagefileWidth();
 
   // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
   if ((Bmp_Data = (unsigned char *)calloc(real_width, sizeof(unsigned char))) == NULL)

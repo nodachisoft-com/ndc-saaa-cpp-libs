@@ -29,6 +29,20 @@ namespace nl
     ImageCanvas(const int width, const int height)
       : width(width), height(height), data(nullptr)
     {
+      data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
+    }
+
+    ~ImageCanvas()
+    {
+      freeResources();
+    }
+
+    /// <summary>
+    /// ƒŠƒ\[ƒX‚ğ‰Šú‰»‚·‚é
+    /// </summary>
+    void freeResources()
+    {
+      free(data);
     }
   };
 };
