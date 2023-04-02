@@ -6,7 +6,7 @@ using namespace nl;
 
 namespace nl
 {
-	// DebugFontData DEBUG_FONT_DATA;
+	DebugFontData DEBUG_FONT_DATA;
 }
 
 unsigned char DebugFontData::getGreyScale256(const int x, const int y)

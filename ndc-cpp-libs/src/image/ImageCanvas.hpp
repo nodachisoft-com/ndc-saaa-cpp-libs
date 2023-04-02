@@ -30,7 +30,6 @@ namespace nl
     ImageCanvas(const int width, const int height)
       : width(width), height(height)
     {
-      std::cout << "ImageCanvas w=" << width << ", h=" << height << std::endl;
       data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
     }
 

@@ -270,6 +270,7 @@ void BitmapImage::clear(ColorRGB &color)
 }
 
 // フォントデータ読み込み
+/*
 bool BitmapImage::initializeFontdata()
 {
 
@@ -290,6 +291,7 @@ bool BitmapImage::initializeFontdata()
   }
   return true;
 }
+*/
 
 void BitmapImage::writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB &color)
 {
@@ -303,11 +305,11 @@ void BitmapImage::writeText(const int destBeginX, const int destBeginY, const st
 
 void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB &color)
 {
-  if (fontImage == nullptr)
-  {
+  //if (fontImage == nullptr)
+  //{
     // フォントデータを読み込む
-    initializeFontdata();
-  }
+  //  initializeFontdata();
+  //}
   // 描画対象の範囲外の文字コードが渡された
   if (ch < ' ' || '~' < ch)
   {
@@ -332,7 +334,9 @@ void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const ch
 
       // フォント画像を書き込み。白色は透明化
       // フォント画像が黒色に近い程、フォント色側に書き込み先の元色を近づけることで、印字を表現。
-      ColorRGB fontBaseColor = fontImage->get(fontImgBeginX + x, y);
+      ColorRGB fontBaseColor = DEBUG_FONT_DATA.getFontCanvas()->get(fontImgBeginX + x, y);
+      // ColorRGB fontBaseColor = DEBUG_FONT_DATA.getFontCanvas().get(fontImgBeginX + x, y);
+      // ColorRGB fontBaseColor = fontImage->get(fontImgBeginX + x, y);
       ColorRGB beforeColor = get(destX, destY);
 
       // 0.0f は字に近い。1.0f は字から遠い

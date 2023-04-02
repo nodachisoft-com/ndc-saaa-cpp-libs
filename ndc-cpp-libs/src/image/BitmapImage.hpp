@@ -36,7 +36,7 @@ namespace nl
     int fontWidth = 11;  // フォントの幅サイズ(px)
     int fontHeight = 21; // フォントの高さ(px)
 
-    bool initializeFontdata(); // フォントデータを読み込む
+    // bool initializeFontdata(); // フォントデータを読み込む
 
 
 

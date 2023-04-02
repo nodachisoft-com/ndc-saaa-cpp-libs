@@ -22,6 +22,11 @@ namespace nl
     static const int width = 1045;
     static const int height = 21;
     unsigned char getGreyScale256(const int x, const int y);
+
+    ImageCanvas* getFontCanvas()
+    {
+      return &fontCanvas;
+    }
   };
 
   // グローバルで一つの DebugFontData を保持する
