@@ -73,13 +73,14 @@ void BitmapImage::ReadBmp(const char *filename)
       BitmapMetainfo::MAX_IMAGE_MEMORY);
     exit(1);
   }
-  metainfo.setSize(width, height);
+
 
   // キャンバスの削除
   delete imgp;
 
   // キャンバスの再確保
   imgp = new ImageCanvas( width, height );
+  metainfo.setSize(width, height);
 
   memcpy(&Bmp_color, Bmp_headbuf + 28, sizeof(Bmp_color));
   if (Bmp_color != 24)
@@ -235,20 +236,23 @@ void BitmapImage::PrintBmpInfo(const char *filename)
 
 void BitmapImage::set(int x, int y, ColorRGB &color)
 {
-  int pos = metainfo.Bmp_width * y + x;
-  imgp->data[pos].b = color.b;
-  imgp->data[pos].g = color.g;
-  imgp->data[pos].r = color.r;
+  imgp->set(x,y,color);
+  //int pos = metainfo.Bmp_width * y + x;
+  //imgp->data[pos].b = color.b;
+  //imgp->data[pos].g = color.g;
+  //imgp->data[pos].r = color.r;
 }
 
 ColorRGB BitmapImage::get(int x, int y)
 {
-  int pos = metainfo.Bmp_width * y + x;
-  ColorRGB result;
-  result.b = imgp->data[pos].b;
-  result.g = imgp->data[pos].g;
-  result.r = imgp->data[pos].r;
-  return result;
+
+  //int pos = metainfo.Bmp_width * y + x;
+  //ColorRGB result;
+  //result.b = imgp->data[pos].b;
+  //result.g = imgp->data[pos].g;
+  //result.r = imgp->data[pos].r;
+  //return result;
+  return imgp->get(x,y);
 }
 
 long BitmapImage::getWidth()
@@ -263,16 +267,17 @@ long BitmapImage::getHeight()
 
 void BitmapImage::clear(ColorRGB &color)
 {
-  unsigned char r = color.r;
-  unsigned char g = color.g;
-  unsigned char b = color.b;
-  int size = metainfo.Bmp_width * metainfo.Bmp_height;
-  for (int i = 0; i < size; i++)
-  {
-    imgp->data[i].b = b;
-    imgp->data[i].g = g;
-    imgp->data[i].r = r;
-  }
+  //unsigned char r = color.r;
+  //unsigned char g = color.g;
+  //unsigned char b = color.b;
+  //int size = metainfo.Bmp_width * metainfo.Bmp_height;
+  //for (int i = 0; i < size; i++)
+  //{
+  //  imgp->data[i].b = b;
+  //  imgp->data[i].g = g;
+  //  imgp->data[i].r = r;
+  //}
+  imgp->clear(color);
 }
 
 // フォントデータ読み込み

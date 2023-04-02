@@ -34,15 +34,27 @@ namespace nl
 
     ~ImageCanvas()
     {
-      freeResources();
+      free(data);
     }
 
-    /// <summary>
-    /// リソースを初期化する
-    /// </summary>
-    void freeResources()
+
+    void set(int x, int y, ColorRGB& color);
+
+
+    ColorRGB get(int x, int y);
+
+    void clear(ColorRGB& color);
+
+
+  public: // アクセサ
+    int getWidth()
     {
-      free(data);
+      return width;
+    }
+
+    int getHeight()
+    {
+      return height;
     }
   };
 };

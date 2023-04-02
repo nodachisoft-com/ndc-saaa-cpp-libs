@@ -4,34 +4,24 @@ using namespace nl;
 
 
 
-/*
+
 void ImageCanvas::set(int x, int y, ColorRGB& color)
 {
-  int pos = metainfo.Bmp_width * y + x;
-  imgp.data[pos].b = color.b;
-  imgp.data[pos].g = color.g;
-  imgp.data[pos].r = color.r;
+  int pos = width * y + x;
+  data[pos].b = color.b;
+  data[pos].g = color.g;
+  data[pos].r = color.r;
 }
 
 
 ColorRGB ImageCanvas::get(int x, int y)
 {
-  int pos = metainfo.Bmp_width * y + x;
+  int pos = width * y + x;
   ColorRGB result;
-  result.b = imgp.data[pos].b;
-  result.g = imgp.data[pos].g;
-  result.r = imgp.data[pos].r;
+  result.b = data[pos].b;
+  result.g = data[pos].g;
+  result.r = data[pos].r;
   return result;
-}
-
-long ImageCanvas::getWidth()
-{
-  return metainfo.Bmp_width;
-}
-
-long ImageCanvas::getHeight()
-{
-  return metainfo.Bmp_height;
 }
 
 void ImageCanvas::clear(ColorRGB& color)
@@ -39,15 +29,14 @@ void ImageCanvas::clear(ColorRGB& color)
   unsigned char r = color.r;
   unsigned char g = color.g;
   unsigned char b = color.b;
-  int size = metainfo.Bmp_width * metainfo.Bmp_height;
+  int size = width * height;
   for (int i = 0; i < size; i++)
   {
-    imgp.data[i].b = b;
-    imgp.data[i].g = g;
-    imgp.data[i].r = r;
+    data[i].b = b;
+    data[i].g = g;
+    data[i].r = r;
   }
 }
-*/
 
 // フォントデータ読み込み
 /*
