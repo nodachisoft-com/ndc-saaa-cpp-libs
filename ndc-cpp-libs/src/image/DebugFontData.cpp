@@ -4,10 +4,10 @@
 
 using namespace nl;
 
-namespace nl
-{
-	DebugFontData DEBUG_FONT_DATA;
-}
+//namespace nl
+//{
+//	DebugFontData DEBUG_FONT_DATA;
+//}
 
 unsigned char DebugFontData::getGreyScale256(const int x, const int y)
 {
@@ -18,7 +18,7 @@ unsigned char DebugFontData::getGreyScale256(const int x, const int y)
 }
 
 DebugFontData::DebugFontData()
-: fontCanvas(width,height)
+//: fontCanvas(width,height)
 {
 	FONT_DATA = "";
 	FONT_DATA.append("7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777");
@@ -243,11 +243,11 @@ DebugFontData::DebugFontData()
 	FONT_DATA.append("777777777777777775777777777777777777777777777");
 
 	// キャンバスデータにフォントデータをラスタライズ
-	loadToCanvas();
+	//loadToCanvas();
 
 }
 
-
+/*
 void DebugFontData::loadToCanvas() {
 
 	// フォントデータ読み込み
@@ -266,7 +266,7 @@ void DebugFontData::loadToCanvas() {
 		}
 	}
 }
-
+*/
 
 DebugFontData::~DebugFontData()
 {

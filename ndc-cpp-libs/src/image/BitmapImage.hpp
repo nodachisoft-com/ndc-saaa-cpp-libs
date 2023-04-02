@@ -10,7 +10,7 @@
 #include <cstdlib>
 
 #include "ImageCanvas.hpp"
-#include "DebugFontData.hpp"
+// #include "DebugFontData.hpp"
 #include "BitmapMetainfo.hpp"
 #include "ColorRGB.hpp"
 
@@ -31,10 +31,10 @@ namespace nl
     // Metainfo
     BitmapMetainfo metainfo;
 
-    BitmapImage *fontImage = nullptr; // 文字描画のフォントデータ読み込み先
+    //BitmapImage *fontImage = nullptr; // 文字描画のフォントデータ読み込み先
     // std::string fontPath("debugfont.bmp"); // 読み込むフォントデータのパス
-    int fontWidth = 11;  // フォントの幅サイズ(px)
-    int fontHeight = 21; // フォントの高さ(px)
+    //int fontWidth = 11;  // フォントの幅サイズ(px)
+    //int fontHeight = 21; // フォントの高さ(px)
 
     // bool initializeFontdata(); // フォントデータを読み込む
 
@@ -103,7 +103,10 @@ namespace nl
     /// BitmapImage に保持されている ImageCanvas への参照を取得する
     /// </summary>
     /// <returns>ImageCanvas への参照</returns>
-    //ImageCanvas *getRefImageCanvas();
+    ImageCanvas* getRefImageCanvas()
+    {
+      return imgp;
+    }
 
     /// <summary>
     /// ImageCanvas 情報をコピーして BitmapImage にセットする

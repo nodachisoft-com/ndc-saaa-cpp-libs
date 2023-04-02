@@ -26,11 +26,11 @@ BitmapImage::~BitmapImage()
 {
   // 画像本体データを解放する
   delete imgp;
-  if (fontImage != nullptr)
-  {
+  //if (fontImage != nullptr)
+  //{
     // フォントデータ読み込み済みなら解放する
-    delete fontImage;
-  }
+  //  delete fontImage;
+  //}
 }
 
 void BitmapImage::ReadBmp(const std::string filename)
@@ -256,72 +256,39 @@ long BitmapImage::getHeight()
 
 void BitmapImage::clear(ColorRGB &color)
 {
-  //unsigned char r = color.r;
-  //unsigned char g = color.g;
-  //unsigned char b = color.b;
-  //int size = metainfo.Bmp_width * metainfo.Bmp_height;
-  //for (int i = 0; i < size; i++)
-  //{
-  //  imgp->data[i].b = b;
-  //  imgp->data[i].g = g;
-  //  imgp->data[i].r = r;
-  //}
   imgp->clear(color);
 }
 
-// フォントデータ読み込み
-/*
-bool BitmapImage::initializeFontdata()
-{
-
-  DebugFontData font;
-  fontImage = new BitmapImage(font.width, font.height);
-  for (int v = 0; v < font.height; v++)
-  {
-    for (int u = 0; u < font.width; u++)
-    {
-      ColorRGB color;
-      unsigned char grey = font.getGreyScale256(u, v);
-      grey = (grey >= 250) ? 255 : grey; // 253 以上は 255 に定義
-      color.r = grey;
-      color.g = grey;
-      color.b = grey;
-      fontImage->set(u, v, color);
-    }
-  }
-  return true;
-}
-*/
 
 void BitmapImage::writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB &color)
 {
+  /*
   size_t size = text.size();
   for (size_t index = 0; index < size; index++)
   {
     const char drawCh = text[index];
-    writeChar(destBeginX + index * fontWidth, destBeginY, drawCh, color);
+    writeChar(destBeginX + index * DebugFontData::width, destBeginY, drawCh, color);
   }
+  */
+  imgp->writeText(destBeginX, destBeginY, text, color);
 }
 
 void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB &color)
 {
-  //if (fontImage == nullptr)
-  //{
-    // フォントデータを読み込む
-  //  initializeFontdata();
-  //}
+  imgp->writeChar(destBeginX, destBeginY, ch, color);
   // 描画対象の範囲外の文字コードが渡された
+  /*
   if (ch < ' ' || '~' < ch)
   {
     // 何も描画しない
     return;
   }
   // コピーするフォント画像データの開始 x 座標を求める
-  int fontImgBeginX = (ch - ' ') * fontWidth;
+  int fontImgBeginX = (ch - ' ') * DebugFontData::width;
 
-  for (int y = 0; y < fontHeight; y++)
+  for (int y = 0; y < DebugFontData::height; y++)
   {
-    for (int x = 0; x < fontWidth; x++)
+    for (int x = 0; x < DebugFontData::width; x++)
     {
       int destX = destBeginX + x;
       int destY = destBeginY + y;
@@ -335,8 +302,6 @@ void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const ch
       // フォント画像を書き込み。白色は透明化
       // フォント画像が黒色に近い程、フォント色側に書き込み先の元色を近づけることで、印字を表現。
       ColorRGB fontBaseColor = DEBUG_FONT_DATA.getFontCanvas()->get(fontImgBeginX + x, y);
-      // ColorRGB fontBaseColor = DEBUG_FONT_DATA.getFontCanvas().get(fontImgBeginX + x, y);
-      // ColorRGB fontBaseColor = fontImage->get(fontImgBeginX + x, y);
       ColorRGB beforeColor = get(destX, destY);
 
       // 0.0f は字に近い。1.0f は字から遠い
@@ -349,4 +314,5 @@ void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const ch
       set(destX, destY, updateColor);
     }
   }
+  */
 }

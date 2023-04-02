@@ -39,51 +39,18 @@ void ImageCanvas::clear(ColorRGB& color)
 }
 
 // フォントデータ読み込み
-/*
-bool ImageCanvas::initializeFontdata()
-{
-  if (fontImage == nullptr) 
-  {
-    // 既に DebugFontData を読み込み済み
-    return false;
-  }
-  DebugFontData font;
-  fontImage = new BitmapImage(font.width, font.height);
-  for (int v = 0; v < font.height; v++)
-  {
-    for (int u = 0; u < font.width; u++)
-    {
-      ColorRGB color;
-      unsigned char grey = font.getGreyScale256(u, v);
-      grey = (grey >= 250) ? 255 : grey; // 253 以上は 255 に定義
-      color.r = grey;
-      color.g = grey;
-      color.b = grey;
-      fontImage->set(u, v, color);
-    }
-  }
-  return true;
-}
-*/
-
-/*
 void ImageCanvas::writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB& color)
 {
   size_t size = text.size();
   for (size_t index = 0; index < size; index++)
   {
     const char drawCh = text[index];
-    writeChar(destBeginX + index * fontWidth, destBeginY, drawCh, color);
+    writeChar(destBeginX + index * DebugFontData::FONTWIDTH, destBeginY, drawCh, color);
   }
 }
 
 void ImageCanvas::writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB& color)
 {
-  if (fontImage == NULL)
-  {
-    // フォントデータを読み込む
-    initializeFontdata();
-  }
   // 描画対象の範囲外の文字コードが渡された
   if (ch < ' ' || '~' < ch)
   {
@@ -91,16 +58,16 @@ void ImageCanvas::writeChar(const int destBeginX, const int destBeginY, const ch
     return;
   }
   // コピーするフォント画像データの開始 x 座標を求める
-  int fontImgBeginX = (ch - ' ') * fontWidth;
+  int fontImgBeginX = (ch - ' ') * DebugFontData::FONTWIDTH;
 
-  for (int y = 0; y < fontHeight; y++)
+  for (int y = 0; y < DebugFontData::FONTHEIGHT; y++)
   {
-    for (int x = 0; x < fontWidth; x++)
+    for (int x = 0; x < DebugFontData::FONTWIDTH; x++)
     {
       int destX = destBeginX + x;
       int destY = destBeginY + y;
-      if ((destX < 0) || (destX >= metainfo.Bmp_width) ||
-        (destY < 0) || (destY >= metainfo.Bmp_height))
+      if ((destX < 0) || (destX >= width) ||
+        (destY < 0) || (destY >= height))
       {
         // 描画先がデータ範囲外
         continue;
@@ -108,7 +75,7 @@ void ImageCanvas::writeChar(const int destBeginX, const int destBeginY, const ch
 
       // フォント画像を書き込み。白色は透明化
       // フォント画像が黒色に近い程、フォント色側に書き込み先の元色を近づけることで、印字を表現。
-      ColorRGB fontBaseColor = fontImage->get(fontImgBeginX + x, y);
+      ColorRGB fontBaseColor = fontCanvas->get(fontImgBeginX + x, y);
       ColorRGB beforeColor = get(destX, destY);
 
       // 0.0f は字に近い。1.0f は字から遠い
@@ -122,4 +89,40 @@ void ImageCanvas::writeChar(const int destBeginX, const int destBeginY, const ch
     }
   }
 }
-*/
+
+ImageCanvas* ImageCanvas::fontCanvas = nullptr;
+int ImageCanvas::sharedCountForFontCanvas = 0;
+
+void ImageCanvas::initDefaultFontData()
+{
+  if (sharedCountForFontCanvas > 0) {
+    // fontCanvas の二回目以降の初期化ループが発生しないように制御
+    return;
+  }
+  sharedCountForFontCanvas++;
+
+  DebugFontData font;
+  fontCanvas = new ImageCanvas(DebugFontData::width, DebugFontData::height);
+
+  int fontCanvasWidth = fontCanvas->getWidth();
+  int fontCanvasHeight = fontCanvas->getHeight();
+  std::cout << "fontCanvas w=" << fontCanvas->getWidth() << " , h="
+    << fontCanvas->getHeight() << std::endl;
+
+
+  // フォントデータ読み込み
+  for (int v = 0; v < fontCanvasHeight; v++)
+  {
+    for (int u = 0; u < fontCanvasWidth; u++)
+    {
+      ColorRGB color;
+      unsigned char grey = font.getGreyScale256(u, v);
+      grey = (grey >= 250) ? 255 : grey; // 253 以上は 255 に定義
+      color.r = grey;
+      color.g = grey;
+      color.b = grey;
+      fontCanvas->set(u, v, color);
+
+    }
+  }
+} 

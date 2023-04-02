@@ -5,10 +5,8 @@
 
 #include <string>
 #include <iostream>
-//#include "BitmapImage.hpp"
+#include "DebugFontData.hpp"
 #include "ColorRGB.hpp"
-//#include "DebugFontData.hpp"
-
 
 namespace nl
 {
@@ -26,26 +24,41 @@ namespace nl
     /// @brief データ本体
     ColorRGB* data;
 
+    /// @brief 共有されるフォントデータ
+    static ImageCanvas *fontCanvas;
+
+    static int sharedCountForFontCanvas;
+
   public:
     ImageCanvas(const int width, const int height)
       : width(width), height(height)
     {
       data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
+      initDefaultFontData();
     }
 
     ~ImageCanvas()
     {
       free(data);
+      sharedCountForFontCanvas--;
+      if (sharedCountForFontCanvas == 0 )
+      {
+        // ImageCanvas オブジェクトの利用者が 0 になったら static 内容を削除
+        delete fontCanvas;
+      }
     }
 
-
     void set(int x, int y, ColorRGB& color);
-
 
     ColorRGB get(int x, int y);
 
     void clear(ColorRGB& color);
 
+    void writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB& color);
+
+    void writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB& color);
+
+    void initDefaultFontData();
 
   public: // アクセサ
     int getWidth()

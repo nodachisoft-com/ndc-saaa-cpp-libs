@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <string>
-#include "ImageCanvas.hpp"
+// #include "ImageCanvas.hpp"
 
 namespace nl
 {
@@ -10,10 +10,10 @@ namespace nl
     std::string FONT_DATA;
 
     // GreyScale から復元されたキャンバス画像データ
-    ImageCanvas fontCanvas;
+    // ImageCanvas fontCanvas;
 
   private: // 非公開Method
-    void loadToCanvas();
+    // void loadToCanvas();
 
 
   public:
@@ -21,14 +21,22 @@ namespace nl
     ~DebugFontData();
     static const int width = 1045;
     static const int height = 21;
+
+    // フォントの幅サイズ(px)
+    static const int FONTWIDTH = 11;
+
+    // フォントの高さ(px)
+    static const int FONTHEIGHT = 21;
+
+
     unsigned char getGreyScale256(const int x, const int y);
 
-    ImageCanvas* getFontCanvas()
-    {
-      return &fontCanvas;
-    }
+    //ImageCanvas* getFontCanvas()
+    //{
+    //  return &fontCanvas;
+    //}
   };
 
   // グローバルで一つの DebugFontData を保持する
-  extern DebugFontData DEBUG_FONT_DATA;
+  //extern DebugFontData DEBUG_FONT_DATA;
 }
