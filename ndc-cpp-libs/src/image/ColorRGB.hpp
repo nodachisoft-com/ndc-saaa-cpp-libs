@@ -18,5 +18,14 @@ namespace nl
 
     /// @brief ÂF—v‘f
     unsigned char b;
+
+    ColorRGB()
+      : r(0), g(0), b(0)
+    {}
+
+    ColorRGB(unsigned char r, unsigned char g, unsigned char b)
+      : r(r), g(g), b(b)
+    {
+    }
   };
 }

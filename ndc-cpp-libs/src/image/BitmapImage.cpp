@@ -11,37 +11,15 @@ BitmapImage::BitmapImage(const std::string filename)
 BitmapImage::BitmapImage(const char *filename)
 {
   // 8x8 サイズの画素で初期化する
-  //imgp = ImageCanvas canvas(8,8);
   imgp = new ImageCanvas(8, 8);
-  //imgp = canvas;
-  //imgp = new ImageCanvas();
-  // imgp.
-
-
   metainfo.setSize(8,8);
-
-
   ReadBmp(filename);
 }
 
 BitmapImage::BitmapImage(const int width, const int height)
 {
   imgp = new ImageCanvas(width, height);
-  // imgp = new ImageCanvas();
-  imgp->width = width;
-  imgp->height = height;
-
-  //imgp.width = width;
-  //imgp.height = height;
-  //Bmp_width = width;
-  //Bmp_height = height;
-  //Bmp_image_size = width * height * 3;
   metainfo.setSize(width, height);
-
-  //for (int i = 0; i < HEADERSIZE; i++)
-  //{
-  //  Bmp_headbuf[i] = 0;
-  //}
   imgp->data = (ColorRGB *)calloc(width * height, sizeof(ColorRGB));
 }
 
@@ -49,9 +27,9 @@ BitmapImage::~BitmapImage()
 {
   // 画像本体データを解放する
   free(imgp->data);
-  imgp->data = NULL;
+  imgp->data = nullptr;
 
-  if (fontImage != NULL)
+  if (fontImage != nullptr)
   {
     // フォントデータ読み込み済みなら解放する
     delete fontImage;
@@ -100,7 +78,7 @@ void BitmapImage::ReadBmp(const char *filename)
   }
   metainfo.setSize(width, height);
 
-  if (imgp->data != NULL)
+  if (imgp->data != nullptr)
   {
     // 前回のバッファが存在する場合は解放
     free(imgp->data);
@@ -178,36 +156,9 @@ void BitmapImage::WriteBmp(const char *filename)
     exit(1);
   }
 
-  // ヘッダ情報作成
-  /*
-  Bmp_xppm = Bmp_yppm = 0;
-  Bmp_image_size = imgp.height * real_width;
-  Bmp_size = Bmp_image_size + HEADERSIZE;
-  Bmp_headbuf[0] = 'B';
-  Bmp_headbuf[1] = 'M';
-  memcpy(Bmp_headbuf + 2, &Bmp_size, sizeof(Bmp_size));
-  Bmp_headbuf[6] = Bmp_headbuf[7] = Bmp_headbuf[8] = Bmp_headbuf[9] = 0;
-  memcpy(Bmp_headbuf + 10, &Bmp_header_size, sizeof(Bmp_header_size));
-  Bmp_headbuf[11] = Bmp_headbuf[12] = Bmp_headbuf[13] = 0;
-  memcpy(Bmp_headbuf + 14, &Bmp_info_header_size, sizeof(Bmp_info_header_size));
-  Bmp_headbuf[15] = Bmp_headbuf[16] = Bmp_headbuf[17] = 0;
-
-  memcpy(Bmp_headbuf + 18, &imgp.width, sizeof(imgp.width));
-  memcpy(Bmp_headbuf + 22, &imgp.height, sizeof(imgp.height));
-  memcpy(Bmp_headbuf + 26, &Bmp_planes, sizeof(Bmp_planes));
-  memcpy(Bmp_headbuf + 28, &Bmp_color, sizeof(Bmp_color));
-  memcpy(Bmp_headbuf + 34, &Bmp_image_size, sizeof(Bmp_image_size));
-  memcpy(Bmp_headbuf + 38, &Bmp_xppm, sizeof(Bmp_xppm));
-  memcpy(Bmp_headbuf + 42, &Bmp_yppm, sizeof(Bmp_yppm));
-  Bmp_headbuf[46] = Bmp_headbuf[47] = Bmp_headbuf[48] = Bmp_headbuf[49] = 0;
-  Bmp_headbuf[50] = Bmp_headbuf[51] = Bmp_headbuf[52] = Bmp_headbuf[53] = 0;
-  */
-  // std::shared_ptr<uint8_t[]> buf = metainfo.getBmpFileHeader();
   uint8_t *buf = metainfo.getBmpFileHeader();
 
   // ヘッダ情報書き出し
-  // fwrite(Bmp_headbuf, sizeof(unsigned char), HEADERSIZE, Out_Fp);
-  // fwrite(buf.get(), sizeof(unsigned char), metainfo.HEADERSIZE, Out_Fp);
   fwrite(buf, sizeof(unsigned char), metainfo.HEADERSIZE, Out_Fp);
 
   // 画像データ書き出し
@@ -242,8 +193,8 @@ void BitmapImage::PrintBmpInfo(const std::string filename)
 void BitmapImage::PrintBmpInfo(const char *filename)
 {
   FILE* Bmp_Fp;
+  // バイナリモード読み込み用にオープン
   errno_t err = fopen_s(&Bmp_Fp, filename, "rb");
-  //FILE *Bmp_Fp = fopen(filename, "rb"); // バイナリモード読み込み用にオープン
   if (err != 0) {
     fprintf(stderr, "Error: file %s couldn\'t open for write!.\n", filename);
     exit(1);
@@ -363,7 +314,7 @@ void BitmapImage::writeText(const int destBeginX, const int destBeginY, const st
 
 void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB &color)
 {
-  if (fontImage == NULL)
+  if (fontImage == nullptr)
   {
     // フォントデータを読み込む
     initializeFontdata();
