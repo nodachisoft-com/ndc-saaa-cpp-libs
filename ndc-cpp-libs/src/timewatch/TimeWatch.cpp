@@ -46,10 +46,10 @@ void TimeWatch::addRealTime(const int64_t deltaTimeMs)
   {
     return;
   }
-  int deltaTimePlus = deltaTimeMs * appSpeed;
+  int deltaTimePlus = (int)(deltaTimeMs * appSpeed);
   timeFromStartMs += deltaTimePlus;
-  int leftTimeMs = deltaTimePlus;
-  int size = tasklist.size();
+  int64_t leftTimeMs = deltaTimePlus;
+  int size = (int)tasklist.size();
   for (int i = 0; i < size; i++)
   {
     // ScheduleTask eachTask = tasklist[i];
@@ -79,7 +79,7 @@ void TimeWatch::pushTask(ScheduleTask task)
 
 bool TimeWatch::checkTaskCompleted(const int taskcode)
 {
-  int size = tasklist.size();
+  int size = (int)tasklist.size();
   for (int i = 0; i < size; i++)
   {
     int eachTaskcode = tasklist[i].getTaskcode();
@@ -94,7 +94,7 @@ bool TimeWatch::checkTaskCompleted(const int taskcode)
 int TimeWatch::getNowProgressingTaskcode()
 {
   int result = -1;
-  int size = tasklist.size();
+  int size = (int)tasklist.size();
   for (int i = 0; i < size; i++)
   {
     if (!tasklist[i].isCompleted())
@@ -108,7 +108,7 @@ int TimeWatch::getNowProgressingTaskcode()
 float TimeWatch::getProcessingTaskProgress()
 {
   float result = -1.0f;
-  int size = tasklist.size();
+  int size = (int)tasklist.size();
   for (int i = 0; i < size; i++)
   {
     if (!tasklist[i].isCompleted())
@@ -124,7 +124,7 @@ float TimeWatch::getWholeTasksProgress()
   int64_t wholeAmount = 0;
   int64_t progressAmount = 0;
 
-  int size = tasklist.size();
+  int size = (int)tasklist.size();
   if (size == 0)
   {
     // 一つもタスクが存在しないなら 0.0f を返す

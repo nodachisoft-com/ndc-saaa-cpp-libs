@@ -64,7 +64,7 @@ void BitmapImage::ReadBmp(const char *filename)
     fprintf(
       stderr,
       "Error: Image Size is too large. size=%d. Size Limit(X*Y)=%d\n",
-      imgp->width * imgp->height,
+      imgp->getWidth() * imgp->getHeight(),
       BitmapMetainfo::MAX_IMAGE_MEMORY);
     exit(1);
   }

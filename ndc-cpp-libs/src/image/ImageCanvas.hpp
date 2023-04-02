@@ -16,17 +16,9 @@ namespace nl
   class ImageCanvas
   {
   public:
-    /// @brief 高さ
-    int height;
-
-    /// @brief 幅
-    int width;
 
     /// @brief データ本体
-    // ColorRGB* data;
-
     Memory2d<ColorRGB> data;
-
 
     /// @brief 共有されるフォントデータ
     static ImageCanvas *fontCanvas;
@@ -39,15 +31,13 @@ namespace nl
 
   public:
     ImageCanvas(const int width, const int height)
-      : width(width), height(height), data(width, height, ColorRGB(0,0,0))
+      : data(width, height, ColorRGB(0, 0, 0))
     {
-      //data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
       initDefaultFontData();
     }
 
     ~ImageCanvas()
     {
-      // free(data);
       sharedCountForFontCanvas--;
       if (sharedCountForFontCanvas == 0 )
       {
@@ -100,13 +90,13 @@ namespace nl
     /// @brief 画像の横方向ピクセル数を取得する
     int getWidth()
     {
-      return width;
+      return data.getWidth();
     }
 
     /// @brief 画像の縦方向ピクセル数を取得する
     int getHeight()
     {
-      return height;
+      return data.getHeight();
     }
   };
 };

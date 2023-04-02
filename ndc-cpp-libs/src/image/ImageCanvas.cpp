@@ -44,8 +44,8 @@ void ImageCanvas::clear(ColorRGB& color)
 // フォントデータ読み込み
 void ImageCanvas::writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB& color)
 {
-  size_t size = text.size();
-  for (size_t index = 0; index < size; index++)
+  int size = (int)text.size();
+  for (int index = 0; index < size; index++)
   {
     const char drawCh = text[index];
     writeChar(destBeginX + index * DebugFontData::FONTWIDTH, destBeginY, drawCh, color);
@@ -60,6 +60,10 @@ void ImageCanvas::writeChar(const int destBeginX, const int destBeginY, const ch
     // 何も描画しない
     return;
   }
+  int width = getWidth();
+  int height = getHeight();
+
+
   // コピーするフォント画像データの開始 x 座標を求める
   int fontImgBeginX = (ch - ' ') * DebugFontData::FONTWIDTH;
 
