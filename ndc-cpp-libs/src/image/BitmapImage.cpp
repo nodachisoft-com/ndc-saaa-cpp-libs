@@ -237,21 +237,10 @@ void BitmapImage::PrintBmpInfo(const char *filename)
 void BitmapImage::set(int x, int y, ColorRGB &color)
 {
   imgp->set(x,y,color);
-  //int pos = metainfo.Bmp_width * y + x;
-  //imgp->data[pos].b = color.b;
-  //imgp->data[pos].g = color.g;
-  //imgp->data[pos].r = color.r;
 }
 
 ColorRGB BitmapImage::get(int x, int y)
 {
-
-  //int pos = metainfo.Bmp_width * y + x;
-  //ColorRGB result;
-  //result.b = imgp->data[pos].b;
-  //result.g = imgp->data[pos].g;
-  //result.r = imgp->data[pos].r;
-  //return result;
   return imgp->get(x,y);
 }
 
