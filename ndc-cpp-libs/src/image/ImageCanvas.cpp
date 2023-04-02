@@ -5,21 +5,7 @@ using namespace nl;
 
 
 
-void ImageCanvas::set(int x, int y, ColorRGB& color)
-{
-  data.setWithIgnoreOutOfRangeData(x,y,color);
-}
 
-
-ColorRGB ImageCanvas::get(int x, int y)
-{
-  return data.getWithIgnoreOutOfRangeData(x,y);
-}
-
-void ImageCanvas::clear(ColorRGB& color)
-{
-  data.setWholeData(color);
-}
 
 // フォントデータ読み込み
 void ImageCanvas::writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB& color)
