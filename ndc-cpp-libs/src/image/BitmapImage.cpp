@@ -101,10 +101,8 @@ void BitmapImage::ReadBmp(const char *filename)
     {
       int x = j;
       int y = height - i - 1; // BMP はデータと画像の Y 軸は反転
-      int pos = width * y + x;
-      imgp->data[pos].b = Bmp_Data[x * 3];
-      imgp->data[pos].g = Bmp_Data[x * 3 + 1];
-      imgp->data[pos].r = Bmp_Data[x * 3 + 2];
+      ColorRGB color(Bmp_Data[x * 3], Bmp_Data[x * 3 + 1], Bmp_Data[x * 3 + 2]);
+      imgp->set(x,y, color);
     }
   }
 
@@ -159,10 +157,11 @@ void BitmapImage::WriteBmp(const char *filename)
     {
       int x = j;
       int y = metainfo.Bmp_height - i - 1; // BMP はデータと画像の Y 軸は反転
-      int pos = metainfo.Bmp_width * y + x;
-      Bmp_Data[x * 3] = imgp->data[pos].b;
-      Bmp_Data[x * 3 + 1] = imgp->data[pos].g;
-      Bmp_Data[x * 3 + 2] = imgp->data[pos].r;
+
+      ColorRGB color = imgp->data.getWithIgnoreOutOfRangeData(x, y);
+      Bmp_Data[x * 3] = color.b;
+      Bmp_Data[x * 3+1] = color.g;
+      Bmp_Data[x * 3+2] = color.r;
     }
     for (int j = metainfo.Bmp_width * 3; j < real_width; j++)
     {

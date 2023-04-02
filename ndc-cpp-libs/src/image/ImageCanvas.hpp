@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include "../memory_bank/Memory2d.hpp"
 #include "DebugFontData.hpp"
 #include "ColorRGB.hpp"
 
@@ -22,7 +23,10 @@ namespace nl
     int width;
 
     /// @brief データ本体
-    ColorRGB* data;
+    // ColorRGB* data;
+
+    Memory2d<ColorRGB> data;
+
 
     /// @brief 共有されるフォントデータ
     static ImageCanvas *fontCanvas;
@@ -35,15 +39,15 @@ namespace nl
 
   public:
     ImageCanvas(const int width, const int height)
-      : width(width), height(height)
+      : width(width), height(height), data(width, height, ColorRGB(0,0,0))
     {
-      data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
+      //data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
       initDefaultFontData();
     }
 
     ~ImageCanvas()
     {
-      free(data);
+      // free(data);
       sharedCountForFontCanvas--;
       if (sharedCountForFontCanvas == 0 )
       {

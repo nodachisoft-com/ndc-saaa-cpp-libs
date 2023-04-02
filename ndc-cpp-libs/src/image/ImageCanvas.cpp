@@ -7,35 +7,38 @@ using namespace nl;
 
 void ImageCanvas::set(int x, int y, ColorRGB& color)
 {
-  int pos = width * y + x;
-  data[pos].b = color.b;
-  data[pos].g = color.g;
-  data[pos].r = color.r;
+  //int pos = width * y + x;
+  //data[pos].b = color.b;
+  //data[pos].g = color.g;
+  //data[pos].r = color.r;
+  data.setWithIgnoreOutOfRangeData(x,y,color);
 }
 
 
 ColorRGB ImageCanvas::get(int x, int y)
 {
-  int pos = width * y + x;
-  ColorRGB result;
-  result.b = data[pos].b;
-  result.g = data[pos].g;
-  result.r = data[pos].r;
-  return result;
+  //int pos = width * y + x;
+  //ColorRGB result;
+  //result.b = data[pos].b;
+  //result.g = data[pos].g;
+  //result.r = data[pos].r;
+  //return result;
+  return data.getWithIgnoreOutOfRangeData(x,y);
 }
 
 void ImageCanvas::clear(ColorRGB& color)
 {
-  unsigned char r = color.r;
-  unsigned char g = color.g;
-  unsigned char b = color.b;
-  int size = width * height;
-  for (int i = 0; i < size; i++)
-  {
-    data[i].b = b;
-    data[i].g = g;
-    data[i].r = r;
-  }
+  //unsigned char r = color.r;
+  //unsigned char g = color.g;
+  //unsigned char b = color.b;
+  //int size = width * height;
+  //for (int i = 0; i < size; i++)
+  //{
+  //  data[i].b = b;
+  //  data[i].g = g;
+  //  data[i].r = r;
+  //}
+  data.setWholeData(color);
 }
 
 // フォントデータ読み込み
