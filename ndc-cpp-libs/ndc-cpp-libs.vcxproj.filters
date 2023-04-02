@@ -181,15 +181,6 @@
     <ClInclude Include="src\timewatch\TimeWatch.hpp">
       <Filter>src\timewatch</Filter>
     </ClInclude>
-    <ClInclude Include="src\image\BitmapImage.hpp">
-      <Filter>src\image</Filter>
-    </ClInclude>
-    <ClInclude Include="src\image\DebugFontData.hpp">
-      <Filter>src\image</Filter>
-    </ClInclude>
-    <ClInclude Include="src\image\index.hpp">
-      <Filter>src\image</Filter>
-    </ClInclude>
     <ClInclude Include="src\memory_bank\index.hpp">
       <Filter>src\memory_bank</Filter>
     </ClInclude>
@@ -250,6 +241,24 @@
     <ClInclude Include="src\geometry\Vector2d.hpp">
       <Filter>src\geometry</Filter>
     </ClInclude>
+    <ClInclude Include="src\image\BitmapImage.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\BitmapMetainfo.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\ColorRGB.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\DebugFontData.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\ImageCanvas.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image\index.hpp">
+      <Filter>src\image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hash\Crc32.cpp">
@@ -300,12 +309,6 @@
     <ClCompile Include="src\timewatch\TimeWatch.cpp">
       <Filter>src\timewatch</Filter>
     </ClCompile>
-    <ClCompile Include="src\image\BitmapImage.cpp">
-      <Filter>src\image</Filter>
-    </ClCompile>
-    <ClCompile Include="src\image\DebugFontData.cpp">
-      <Filter>src\image</Filter>
-    </ClCompile>
     <ClCompile Include="src\memory_bank\MemoryBank.cpp">
       <Filter>src\memory_bank</Filter>
     </ClCompile>
@@ -333,5 +336,19 @@
     <ClCompile Include="src\geometry\Vector2d.cpp">
       <Filter>src\geometry</Filter>
     </ClCompile>
+    <ClCompile Include="src\image\BitmapImage.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image\DebugFontData.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image\ImageCanvas.cpp">
+      <Filter>src\image</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\image\debugfont.bmp">
+      <Filter>src\image</Filter>
+    </Image>
   </ItemGroup>
 </Project>

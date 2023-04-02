@@ -45,7 +45,10 @@
     <ClInclude Include="src\hash\Crc32.hpp" />
     <ClInclude Include="src\hash\index.hpp" />
     <ClInclude Include="src\image\BitmapImage.hpp" />
+    <ClInclude Include="src\image\BitmapMetainfo.hpp" />
+    <ClInclude Include="src\image\ColorRGB.hpp" />
     <ClInclude Include="src\image\DebugFontData.hpp" />
+    <ClInclude Include="src\image\ImageCanvas.hpp" />
     <ClInclude Include="src\image\index.hpp" />
     <ClInclude Include="src\log\ILogAppender.hpp" />
     <ClInclude Include="src\log\index.hpp" />
@@ -97,6 +100,7 @@
     <ClCompile Include="src\hash\Crc32.cpp" />
     <ClCompile Include="src\image\BitmapImage.cpp" />
     <ClCompile Include="src\image\DebugFontData.cpp" />
+    <ClCompile Include="src\image\ImageCanvas.cpp" />
     <ClCompile Include="src\log\Logger.cpp" />
     <ClCompile Include="src\log\LogMgr.cpp" />
     <ClCompile Include="src\math\fsqrt.cpp" />
@@ -111,6 +115,9 @@
     <ClCompile Include="src\serializable\SerializeBuffer.cpp" />
     <ClCompile Include="src\timewatch\ScheduleTask.cpp" />
     <ClCompile Include="src\timewatch\TimeWatch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\image\debugfont.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

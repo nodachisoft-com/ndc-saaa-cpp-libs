@@ -31,3 +31,16 @@ TEST(BitmapImage, case2)
   BitmapImage image("..\\..\\ndc-cpp-libs-test\\src\\image\\test_bmp_001.bmp");
   image.WriteBmp(filepath);
 }
+
+// 画像データのヘッダー情報を確認する
+/*
+TEST(BitmapImage, check_headerbytes_succ001)
+{
+  std::string filepath(TESTTMP_DIR + "test_BitmapImage_case2.bmp");
+
+  // 事前準備（テストファイル削除）
+  FileAccessMgr::removefile(filepath);
+  BitmapImage image("..\\..\\ndc-cpp-libs-test\\src\\image\\test_bmp_001.bmp");
+  image.WriteBmp(filepath);
+}
+*/

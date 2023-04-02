@@ -1,40 +1,55 @@
 ﻿#include "BitmapImage.hpp"
 
+
 using namespace nl;
 
 BitmapImage::BitmapImage(const std::string filename)
+  :BitmapImage(filename.c_str())
 {
-  BitmapImage(filename.c_str());
 }
 
 BitmapImage::BitmapImage(const char *filename)
 {
   // 8x8 サイズの画素で初期化する
-  ImageDataStruct imageDataStruct{
-      8, 8, NULL};
-  imgp = imageDataStruct;
+  //imgp = ImageCanvas canvas(8,8);
+  imgp = new ImageCanvas(8, 8);
+  //imgp = canvas;
+  //imgp = new ImageCanvas();
+  // imgp.
+
+
+  metainfo.setSize(8,8);
+
+
   ReadBmp(filename);
 }
 
 BitmapImage::BitmapImage(const int width, const int height)
 {
-  imgp.width = width;
-  imgp.height = height;
-  Bmp_width = width;
-  Bmp_height = height;
-  Bmp_image_size = width * height * 3;
-  for (int i = 0; i < HEADERSIZE; i++)
-  {
-    Bmp_headbuf[i] = 0;
-  }
-  imgp.data = (ColorRGB *)calloc(width * height, sizeof(ColorRGB));
+  imgp = new ImageCanvas(width, height);
+  // imgp = new ImageCanvas();
+  imgp->width = width;
+  imgp->height = height;
+
+  //imgp.width = width;
+  //imgp.height = height;
+  //Bmp_width = width;
+  //Bmp_height = height;
+  //Bmp_image_size = width * height * 3;
+  metainfo.setSize(width, height);
+
+  //for (int i = 0; i < HEADERSIZE; i++)
+  //{
+  //  Bmp_headbuf[i] = 0;
+  //}
+  imgp->data = (ColorRGB *)calloc(width * height, sizeof(ColorRGB));
 }
 
 BitmapImage::~BitmapImage()
 {
   // 画像本体データを解放する
-  free(imgp.data);
-  imgp.data = NULL;
+  free(imgp->data);
+  imgp->data = NULL;
 
   if (fontImage != NULL)
   {
@@ -60,28 +75,37 @@ void BitmapImage::ReadBmp(const char *filename)
 
 
   // ヘッダ読み込み
-  fread(Bmp_headbuf, sizeof(unsigned char), HEADERSIZE, Bmp_Fp);
+  unsigned char Bmp_headbuf[54] ={0};
+  char Bmp_type[2]={0};
+  int width = 0, height = 0;
+  int Bmp_color = 0;
+  fread(Bmp_headbuf, sizeof(unsigned char), BitmapMetainfo::HEADERSIZE, Bmp_Fp);
 
-  memcpy(&Bmp_type, Bmp_headbuf, sizeof(Bmp_type));
+  memcpy(&Bmp_type, Bmp_headbuf, sizeof(metainfo.Bmp_type));
   if (strncmp(Bmp_type, "BM", 2) != 0)
   {
     fprintf(stderr, "Error: %s is not a bmp file.\n", filename);
     exit(1);
   }
-  memcpy(&imgp.width, Bmp_headbuf + 18, sizeof(imgp.width));
-  memcpy(&imgp.height, Bmp_headbuf + 22, sizeof(imgp.height));
-  if (imgp.width * imgp.height > MAX_IMAGE_MEMORY)
+  memcpy(&width, Bmp_headbuf + 18, sizeof(int));
+  memcpy(&height, Bmp_headbuf + 22, sizeof(int));
+  if (width * height > BitmapMetainfo::MAX_IMAGE_MEMORY)
   {
-    fprintf(stderr, "Error: Image Size is too large. size=%d. Size Limit(X*Y)=%d\n", imgp.width * imgp.height, MAX_IMAGE_MEMORY);
+    fprintf(
+      stderr,
+      "Error: Image Size is too large. size=%d. Size Limit(X*Y)=%d\n",
+      imgp->width * imgp->height,
+      BitmapMetainfo::MAX_IMAGE_MEMORY);
     exit(1);
   }
+  metainfo.setSize(width, height);
 
-  if (imgp.data != NULL)
+  if (imgp->data != NULL)
   {
     // 前回のバッファが存在する場合は解放
-    free(imgp.data);
+    free(imgp->data);
   }
-  imgp.data = (ColorRGB *)malloc(sizeof(ColorRGB) * imgp.width * imgp.height);
+  imgp->data = (ColorRGB *)malloc(sizeof(ColorRGB) * width * height);
 
   memcpy(&Bmp_color, Bmp_headbuf + 28, sizeof(Bmp_color));
   if (Bmp_color != 24)
@@ -90,7 +114,7 @@ void BitmapImage::ReadBmp(const char *filename)
     exit(1);
   }
 
-  int real_width = imgp.width * 3 + imgp.width % 4; // 4byte 境界にあわせるために実際の幅の計算
+  int real_width = width * 3 + width % 4; // 4byte 境界にあわせるために実際の幅の計算
 
   // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
   if ((Bmp_Data = (unsigned char *)calloc(real_width, sizeof(unsigned char))) == NULL)
@@ -100,17 +124,17 @@ void BitmapImage::ReadBmp(const char *filename)
   }
 
   // 画像データ読み込み
-  for (int i = 0; i < imgp.height; i++)
+  for (int i = 0; i < height; i++)
   {
     fread(Bmp_Data, 1, real_width, Bmp_Fp);
-    for (int j = 0; j < imgp.width; j++)
+    for (int j = 0; j < width; j++)
     {
       int x = j;
-      int y = imgp.height - i - 1; // BMP はデータと画像の Y 軸は反転
-      int pos = imgp.width * y + x;
-      imgp.data[pos].b = Bmp_Data[x * 3];
-      imgp.data[pos].g = Bmp_Data[x * 3 + 1];
-      imgp.data[pos].r = Bmp_Data[x * 3 + 2];
+      int y = height - i - 1; // BMP はデータと画像の Y 軸は反転
+      int pos = width * y + x;
+      imgp->data[pos].b = Bmp_Data[x * 3];
+      imgp->data[pos].g = Bmp_Data[x * 3 + 1];
+      imgp->data[pos].r = Bmp_Data[x * 3 + 2];
     }
   }
 
@@ -138,12 +162,14 @@ void BitmapImage::WriteBmp(const char *filename)
 
   unsigned char* Bmp_Data; // 画像データを1行分格納
 
-  Bmp_color = 24;
-  Bmp_header_size = HEADERSIZE;
-  Bmp_info_header_size = 40;
-  Bmp_planes = 1;
+  int Bmp_color = 24;
+  int Bmp_header_size = metainfo.HEADERSIZE;
+  int Bmp_info_header_size = 40;
+  int Bmp_planes = 1;
 
-  int real_width = imgp.width * 3 + imgp.width % 4; // 4byte 境界にあわせるために実際の幅の計算
+  // int real_width = imgp.width * 3 + imgp.width % 4; // 4byte 境界にあわせるために実際の幅の計算
+  int real_width = // metainfo.Bmp_width * 3 + metainfo.Bmp_width % 4;
+    metainfo.calcRealImagefileWidth();
 
   // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
   if ((Bmp_Data = (unsigned char *)calloc(real_width, sizeof(unsigned char))) == NULL)
@@ -153,6 +179,7 @@ void BitmapImage::WriteBmp(const char *filename)
   }
 
   // ヘッダ情報作成
+  /*
   Bmp_xppm = Bmp_yppm = 0;
   Bmp_image_size = imgp.height * real_width;
   Bmp_size = Bmp_image_size + HEADERSIZE;
@@ -174,23 +201,28 @@ void BitmapImage::WriteBmp(const char *filename)
   memcpy(Bmp_headbuf + 42, &Bmp_yppm, sizeof(Bmp_yppm));
   Bmp_headbuf[46] = Bmp_headbuf[47] = Bmp_headbuf[48] = Bmp_headbuf[49] = 0;
   Bmp_headbuf[50] = Bmp_headbuf[51] = Bmp_headbuf[52] = Bmp_headbuf[53] = 0;
+  */
+  // std::shared_ptr<uint8_t[]> buf = metainfo.getBmpFileHeader();
+  uint8_t *buf = metainfo.getBmpFileHeader();
 
   // ヘッダ情報書き出し
-  fwrite(Bmp_headbuf, sizeof(unsigned char), HEADERSIZE, Out_Fp);
+  // fwrite(Bmp_headbuf, sizeof(unsigned char), HEADERSIZE, Out_Fp);
+  // fwrite(buf.get(), sizeof(unsigned char), metainfo.HEADERSIZE, Out_Fp);
+  fwrite(buf, sizeof(unsigned char), metainfo.HEADERSIZE, Out_Fp);
 
   // 画像データ書き出し
-  for (int i = 0; i < imgp.height; i++)
+  for (int i = 0; i < metainfo.Bmp_height; i++)
   {
-    for (int j = 0; j < imgp.width; j++)
+    for (int j = 0; j < metainfo.Bmp_width; j++)
     {
       int x = j;
-      int y = imgp.height - i - 1; // BMP はデータと画像の Y 軸は反転
-      int pos = imgp.width * y + x;
-      Bmp_Data[x * 3] = imgp.data[pos].b;
-      Bmp_Data[x * 3 + 1] = imgp.data[pos].g;
-      Bmp_Data[x * 3 + 2] = imgp.data[pos].r;
+      int y = metainfo.Bmp_height - i - 1; // BMP はデータと画像の Y 軸は反転
+      int pos = metainfo.Bmp_width * y + x;
+      Bmp_Data[x * 3] = imgp->data[pos].b;
+      Bmp_Data[x * 3 + 1] = imgp->data[pos].g;
+      Bmp_Data[x * 3 + 2] = imgp->data[pos].r;
     }
-    for (int j = imgp.width * 3; j < real_width; j++)
+    for (int j = metainfo.Bmp_width * 3; j < real_width; j++)
     {
       Bmp_Data[j] = 0;
     }
@@ -198,6 +230,8 @@ void BitmapImage::WriteBmp(const char *filename)
   }
   free(Bmp_Data); // １行用のメモリ解放
   fclose(Out_Fp); // ファイルを閉じる
+
+  delete buf;
 }
 
 void BitmapImage::PrintBmpInfo(const std::string filename)
@@ -214,16 +248,13 @@ void BitmapImage::PrintBmpInfo(const char *filename)
     fprintf(stderr, "Error: file %s couldn\'t open for write!.\n", filename);
     exit(1);
   }
-  /*
-  FILE *Bmp_Fp = fopen(filename, "rb");
-  if (Bmp_Fp == NULL)
-  {
-    fprintf(stderr, "Error: file %s couldn\'t open for write!\n", filename);
-    exit(1);
-  }
-  */
 
-  fread(Bmp_headbuf, sizeof(unsigned char), HEADERSIZE, Bmp_Fp);
+  unsigned char Bmp_headbuf[54] ={0};
+  char Bmp_type[2] = { 0 };
+  int width = 0, height = 0;
+  int Bmp_color = 0;
+
+  fread(Bmp_headbuf, sizeof(unsigned char), metainfo.HEADERSIZE, Bmp_Fp);
 
   memcpy(&Bmp_type, Bmp_headbuf, sizeof(Bmp_type));
   if (strncmp(Bmp_type, "BM", 2) != 0)
@@ -231,6 +262,7 @@ void BitmapImage::PrintBmpInfo(const char *filename)
     fprintf(stderr, "Error: %s is not a bmp file.\n", filename);
     exit(1);
   }
+  /*
   memcpy(&Bmp_size, Bmp_headbuf + 2, sizeof(Bmp_size));
   memcpy(&Bmp_width, Bmp_headbuf + 18, sizeof(Bmp_width));
   memcpy(&Bmp_height, Bmp_headbuf + 22, sizeof(Bmp_height));
@@ -250,36 +282,37 @@ void BitmapImage::PrintBmpInfo(const char *filename)
   printf("Image size = %ld (byte)\n", Bmp_image_size);
   printf("Height     = %ld (ppm)\n", Bmp_xppm);
   printf("Width      = %ld (ppm)\n", Bmp_yppm);
+  */
 
   fclose(Bmp_Fp);
 }
 
 void BitmapImage::set(int x, int y, ColorRGB &color)
 {
-  int pos = imgp.width * y + x;
-  imgp.data[pos].b = color.b;
-  imgp.data[pos].g = color.g;
-  imgp.data[pos].r = color.r;
+  int pos = metainfo.Bmp_width * y + x;
+  imgp->data[pos].b = color.b;
+  imgp->data[pos].g = color.g;
+  imgp->data[pos].r = color.r;
 }
 
 ColorRGB BitmapImage::get(int x, int y)
 {
-  int pos = imgp.width * y + x;
+  int pos = metainfo.Bmp_width * y + x;
   ColorRGB result;
-  result.b = imgp.data[pos].b;
-  result.g = imgp.data[pos].g;
-  result.r = imgp.data[pos].r;
+  result.b = imgp->data[pos].b;
+  result.g = imgp->data[pos].g;
+  result.r = imgp->data[pos].r;
   return result;
 }
 
 long BitmapImage::getWidth()
 {
-  return imgp.width;
+  return metainfo.Bmp_width;
 }
 
 long BitmapImage::getHeight()
 {
-  return imgp.height;
+  return metainfo.Bmp_height;
 }
 
 void BitmapImage::clear(ColorRGB &color)
@@ -287,19 +320,18 @@ void BitmapImage::clear(ColorRGB &color)
   unsigned char r = color.r;
   unsigned char g = color.g;
   unsigned char b = color.b;
-  int size = imgp.width * imgp.height;
+  int size = metainfo.Bmp_width * metainfo.Bmp_height;
   for (int i = 0; i < size; i++)
   {
-    imgp.data[i].b = b;
-    imgp.data[i].g = g;
-    imgp.data[i].r = r;
+    imgp->data[i].b = b;
+    imgp->data[i].g = g;
+    imgp->data[i].r = r;
   }
 }
 
 // フォントデータ読み込み
 bool BitmapImage::initializeFontdata()
 {
-  // fontImage = new BitmapImage("src/image/debugfont.bmp");
 
   DebugFontData font;
   fontImage = new BitmapImage(font.width, font.height);
@@ -351,8 +383,8 @@ void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const ch
     {
       int destX = destBeginX + x;
       int destY = destBeginY + y;
-      if ((destX < 0) || (destX >= imgp.width) ||
-          (destY < 0) || (destY >= imgp.height))
+      if ((destX < 0) || (destX >= metainfo.Bmp_width) ||
+          (destY < 0) || (destY >= metainfo.Bmp_height))
       {
         // 描画先がデータ範囲外
         continue;

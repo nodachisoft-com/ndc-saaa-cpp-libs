@@ -5,63 +5,41 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <string.h>
-#include <stdlib.h>
+#include <string>
+// #include <stdlib.h>
+#include <cstdlib>
 
+#include "ImageCanvas.hpp"
 #include "DebugFontData.hpp"
+#include "BitmapMetainfo.hpp"
+#include "ColorRGB.hpp"
+
+
 
 namespace nl
 {
-  /// @brief RGB形式の画素情報
-  typedef struct
-  {
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
-  } ColorRGB;
 
-  /// @brief 画像データのデータ部
-  typedef struct
-  {
-    int height;
-    int width;
-    ColorRGB *data;
-  } ImageDataStruct;
 
   /// @brief Bitmap １つの画像ファイル、データを扱う
   class BitmapImage
   {
   private:
-    // 定数
-    static const int HEADERSIZE = 54;
-    static const int PALLETSIZE = 1024;
-    static const int MAX_IMAGE_MEMORY = (1024 * 1080) * (4 * 2); // @brief 4K レベルを扱い可能な上限サイズとする
 
-    // メタ情報部
-    // TODO: MetaInfo 構造体に入れ込むべき
-    unsigned char Bmp_headbuf[54];  /// @brief ヘッダを格納するための変数
-    unsigned char Bmp_Pallet[1024]; /// @brief カラーパレットを格納
+    /// 画像データ本体
+    ImageCanvas* imgp = nullptr;
 
-    char Bmp_type[2];                  /// @brief ファイルタイプ "BM"
-    unsigned long Bmp_size;            /// @brief bmpファイルのサイズ (バイト)
-    unsigned int Bmp_info_header_size; /// @brief 情報ヘッダのサイズ = 40
-    unsigned int Bmp_header_size;      /// @brief ヘッダサイズ = 54
-    long Bmp_height;                   /// @brief 高さ (ピクセル)
-    long Bmp_width;                    /// @brief 幅   (ピクセル)
-    unsigned short Bmp_planes;         /// @brief プレーン数 常に 1
-    unsigned short Bmp_color;          /// @brief 色 (ビット)     24
-    long Bmp_comp;                     /// @brief 圧縮方法         0
-    long Bmp_image_size;               /// @brief 画像部分のファイルサイズ (バイト)
-    long Bmp_xppm;                     /// @brief 水平解像度 (ppm)
-    long Bmp_yppm;                     /// @brief 垂直解像度 (ppm)
-    ImageDataStruct imgp;              /// 画像データ本体
+    // Metainfo
+    BitmapMetainfo metainfo;
 
-    BitmapImage *fontImage = NULL; // 文字描画のフォントデータ読み込み先
+    BitmapImage *fontImage = nullptr; // 文字描画のフォントデータ読み込み先
     // std::string fontPath("debugfont.bmp"); // 読み込むフォントデータのパス
     int fontWidth = 11;  // フォントの幅サイズ(px)
     int fontHeight = 21; // フォントの高さ(px)
 
     bool initializeFontdata(); // フォントデータを読み込む
+
+
+
 
   public:
     /// @brief コンストラクタ
@@ -119,5 +97,19 @@ namespace nl
     /// @param[in] oneText 描画する文字
     /// @param[in] color フォントの色情報（RGB）
     void writeChar(const int x, const int y, const char oneText, ColorRGB &color);
+
+
+    /// <summary>
+    /// BitmapImage に保持されている ImageCanvas への参照を取得する
+    /// </summary>
+    /// <returns>ImageCanvas への参照</returns>
+    //ImageCanvas *getRefImageCanvas();
+
+    /// <summary>
+    /// ImageCanvas 情報をコピーして BitmapImage にセットする
+    /// </summary>
+    /// <param name="imageCanvas">コピー元の ImageCanvas 参照</param>
+    //void setDeepCopyOfImageCanvas(ImageCanvas &imageCanvas);
+
   };
 };

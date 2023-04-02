@@ -15,4 +15,7 @@ namespace nl
     const int height = 21;
     unsigned char getGreyScale256(const int x, const int y);
   };
-};
+
+  // グローバルで一つの DebugFontData を保持する
+  // extern DebugFontData DEBUG_FONT_DATA;
+}
