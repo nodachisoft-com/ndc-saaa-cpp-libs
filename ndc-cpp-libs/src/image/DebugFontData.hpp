@@ -1,21 +1,29 @@
 ﻿#pragma once
 #include <string>
+#include "ImageCanvas.hpp"
 
 namespace nl
 {
   class DebugFontData
   {
-  private:
+  private: // 非公開メンバ
     std::string FONT_DATA;
+
+    // GreyScale から復元されたキャンバス画像データ
+    ImageCanvas fontCanvas;
+
+  private: // 非公開Method
+    void loadToCanvas();
+
 
   public:
     DebugFontData();
     ~DebugFontData();
-    const int width = 1045;
-    const int height = 21;
+    static const int width = 1045;
+    static const int height = 21;
     unsigned char getGreyScale256(const int x, const int y);
   };
 
   // グローバルで一つの DebugFontData を保持する
-  // extern DebugFontData DEBUG_FONT_DATA;
+  extern DebugFontData DEBUG_FONT_DATA;
 }

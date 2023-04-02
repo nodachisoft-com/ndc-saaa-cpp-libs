@@ -4,6 +4,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 //#include "BitmapImage.hpp"
 #include "ColorRGB.hpp"
 //#include "DebugFontData.hpp"
@@ -27,8 +28,9 @@ namespace nl
 
   public:
     ImageCanvas(const int width, const int height)
-      : width(width), height(height), data(nullptr)
+      : width(width), height(height)
     {
+      std::cout << "ImageCanvas w=" << width << ", h=" << height << std::endl;
       data = (ColorRGB*)calloc(width * height, sizeof(ColorRGB));
     }
 
