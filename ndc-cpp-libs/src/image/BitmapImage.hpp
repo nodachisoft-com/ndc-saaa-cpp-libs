@@ -42,6 +42,10 @@ namespace nl
     // 操作
     void ReadBmp(const std::string filename);
     void ReadBmp(const char *filename);
+
+    // TODO : ImageCanvas を In/Out する モジュール化する
+    // std::unique_ptr<ImageCanvas> ReadBmp(const std::string filename);
+
     void WriteBmp(const std::string filename);
     void WriteBmp(const char *filename);
     void PrintBmpInfo(const std::string filename);

@@ -50,17 +50,27 @@ namespace nl
     /// @param[in] x 書き込む画像内の位置（左を原点とする）
     /// @param[in] y 書き込む画像内の位置（上を原点とする）
     /// @param[in] color 書き込む色情報（RGB）
-    void set(int x, int y, ColorRGB& color);
+    void set(int x, int y, ColorRGB& color)
+    {
+      data.setWithIgnoreOutOfRangeData(x, y, color);
+    }
+
 
     /// @brief 指定の画像位置から色情報を取得する
     /// @param[in] x 書き込む画像内の位置（左を原点とする）
     /// @param[in] y 書き込む画像内の位置（上を原点とする）
     /// @return 取得した色情報（RGB）
-    ColorRGB get(int x, int y);
+    ColorRGB get(int x, int y)
+    {
+      return data.getWithIgnoreOutOfRangeData(x, y);
+    }
 
     /// @brief 画像を指定の色で塗りつぶす
     /// @param[in] color 塗りつぶす色
-    void clear(ColorRGB& color);
+    void clear(ColorRGB& color)
+    {
+      data.setWholeData(color);
+    }
 
     /// @brief
     ///  等幅フォント（1文字当たり11px、高さ 21px）で文字を描画する。

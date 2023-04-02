@@ -16,10 +16,6 @@ void TimeWatch::stop()
   stopFlag = true;
 }
 
-// void TimeWatch::removeCompletedTasks()
-//{
-// }
-
 bool TimeWatch::isStart()
 {
   return !stopFlag;
