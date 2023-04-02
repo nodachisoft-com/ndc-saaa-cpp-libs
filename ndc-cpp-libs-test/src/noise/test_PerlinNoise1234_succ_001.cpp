@@ -35,6 +35,7 @@ TEST(PerlinNoise1234, MT19937_HF_case002)
   int width = 70;
   int height = 46;
   BitmapImage image(width, height);
+  ImageCanvas* canvas = image.getRefImageCanvas();
   PerlinNoise1234 pn(100);
   int noisePointX = 8;
   int noisePointY = 8;
@@ -48,7 +49,7 @@ TEST(PerlinNoise1234, MT19937_HF_case002)
       unsigned char color_elem = (unsigned char)res;
       crc.calcUpdate(color_elem);
       ColorRGB color{color_elem, color_elem, color_elem};
-      image.set(u, v, color);
+      canvas->set(u, v, color);
     }
   }
   image.WriteBmp(TESTTMP_DIR + "MT19937_HF_case002.bmp");
@@ -57,7 +58,7 @@ TEST(PerlinNoise1234, MT19937_HF_case002)
   FileAccessor fa(TESTTMP_DIR + "MT19937_HF_case002.bmp");
   EXPECT_EQ(fa.readFileSync(), true);
   EXPECT_EQ(fa.getFilesize(), 9806);
-  EXPECT_EQ(fa.calcMemoryCrc32(), 278549108); // BITMAP 構造体 + データ本体
+  EXPECT_EQ(fa.calcMemoryCrc32(), 1842797783); // BITMAP 構造体 + データ本体
   EXPECT_EQ(crc.getHash(), 2085138398);       // データ本体のみの CRC32
 }
 

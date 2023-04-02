@@ -15,6 +15,7 @@ TEST(NdcVoronoi, genMap_case001)
   unsigned char typeRange = 3;
   long randomSeed = 100;
   BitmapImage image(width, height);
+  ImageCanvas *canvas = image.getRefImageCanvas();
   ColorRGB colorTable[4] = {
       {200, 0, 0}, {0, 200, 0}, {0, 0, 200}, {200, 200, 0}};
 
@@ -27,7 +28,7 @@ TEST(NdcVoronoi, genMap_case001)
     {
       unsigned char res = voro.pos2(u * noisePx / (float)width, v * noisePy / (float)height);
       crc.calcUpdate(res);
-      image.set(u, v, colorTable[res]);
+      canvas->set(u, v, colorTable[res]);
     }
   }
   image.WriteBmp(path);
@@ -43,6 +44,7 @@ TEST(NdcVoronoi, genMap_case002)
   unsigned char typeRange = 3;
   long randomSeed = 101;
   BitmapImage image(width, height);
+  ImageCanvas* canvas = image.getRefImageCanvas();
   ColorRGB colorTable[4] = {
       {200, 0, 0}, {0, 200, 0}, {0, 0, 200}, {200, 200, 0}};
 
@@ -54,7 +56,7 @@ TEST(NdcVoronoi, genMap_case002)
     {
       unsigned char res = voro.pos2(u * noisePx / (float)width, v * noisePy / (float)height);
       crc.calcUpdate(res);
-      image.set(u, v, colorTable[res]);
+      canvas->set(u, v, colorTable[res]);
     }
   }
   EXPECT_EQ(crc.getHash(), 2484090371); // データ本体部の CRC32

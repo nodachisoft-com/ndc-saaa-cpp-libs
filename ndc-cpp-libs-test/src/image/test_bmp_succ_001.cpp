@@ -11,10 +11,11 @@ TEST(BitmapImage, case1)
   FileAccessMgr::removefile(filepath);
 
   BitmapImage image(16, 16);
+  ImageCanvas* canvas = image.getRefImageCanvas();
   for (int i = 0; i < 5; i++)
   {
     ColorRGB COLOR_RED{0xff, 0x00, 0x00};
-    image.set(i, 2, COLOR_RED);
+    canvas->set(i, 2, COLOR_RED);
   }
   image.WriteBmp(filepath);
 

@@ -15,6 +15,7 @@ TEST(NdcNoisedEdgeVoronoi, pos2_case001)
   unsigned char typeRange = 3;
   long randomSeed = 100;
   BitmapImage image(width, height);
+  ImageCanvas *canvas = image.getRefImageCanvas();
   ColorRGB colorTable[4] = {
       {200, 0, 0}, {0, 200, 0}, {0, 0, 200}, {200, 200, 0}};
 
@@ -33,7 +34,7 @@ TEST(NdcNoisedEdgeVoronoi, pos2_case001)
         return;
       }
       crc.calcUpdate(res);
-      image.set(u, v, colorTable[res]);
+      canvas->set(u, v, colorTable[res]);
     }
   }
   // std::cout << "CRC=" << std::to_string(crc.getHash()) << std::endl;

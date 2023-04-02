@@ -12,6 +12,7 @@ TEST(EdgeNoiseCurveFilter, pos2_case001)
   int width = 640, height = 640;
   float edgeWide = 0.3f;
   BitmapImage image(width, height);
+  ImageCanvas* canvas = image.getRefImageCanvas();
   EdgeNoiseCurveFilter filter(edgeWide);
 
   Crc32 crc;
@@ -22,7 +23,7 @@ TEST(EdgeNoiseCurveFilter, pos2_case001)
       unsigned char h = (unsigned char)(255.0f * filter.pos2(u / (float)width, v / (float)height));
       crc.calcUpdate(h);
       ColorRGB color{h, h, h};
-      image.set(u, v, color);
+      canvas->set(u, v, color);
     }
   }
   std::string path(TESTTMP_DIR + "EdgeNoiseCurveFilter_pos2_case001.bmp");

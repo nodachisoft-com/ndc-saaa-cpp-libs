@@ -234,11 +234,12 @@ void BitmapImage::PrintBmpInfo(const char *filename)
   fclose(Bmp_Fp);
 }
 
-void BitmapImage::set(int x, int y, ColorRGB &color)
-{
-  imgp->set(x,y,color);
-}
+//void BitmapImage::set(int x, int y, ColorRGB &color)
+//{
+//  imgp->set(x,y,color);
+//}
 
+/*
 ColorRGB BitmapImage::get(int x, int y)
 {
   return imgp->get(x,y);
@@ -262,20 +263,21 @@ void BitmapImage::clear(ColorRGB &color)
 
 void BitmapImage::writeText(const int destBeginX, const int destBeginY, const std::string text, ColorRGB &color)
 {
-  /*
+ 
   size_t size = text.size();
   for (size_t index = 0; index < size; index++)
   {
     const char drawCh = text[index];
     writeChar(destBeginX + index * DebugFontData::width, destBeginY, drawCh, color);
   }
-  */
+  
   imgp->writeText(destBeginX, destBeginY, text, color);
 }
+*/
 
-void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB &color)
-{
-  imgp->writeChar(destBeginX, destBeginY, ch, color);
+//void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const char ch, ColorRGB &color)
+//{
+//  imgp->writeChar(destBeginX, destBeginY, ch, color);
   // 描画対象の範囲外の文字コードが渡された
   /*
   if (ch < ' ' || '~' < ch)
@@ -315,4 +317,4 @@ void BitmapImage::writeChar(const int destBeginX, const int destBeginY, const ch
     }
   }
   */
-}
+//}

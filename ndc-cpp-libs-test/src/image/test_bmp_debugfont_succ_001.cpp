@@ -10,7 +10,7 @@ TEST(BitmapImage, writeChar_case001)
   ImageCanvas *canvas = image.getRefImageCanvas();
   
   ColorRGB BASE_COLOR{0x00, 0xa0, 0x10}; // 緑っぽい
-  image.clear(BASE_COLOR);
+  canvas->clear(BASE_COLOR);
 
   ColorRGB COLOR_LIST[] = {
       {0xff, 0x00, 0x00}, // 赤
@@ -44,7 +44,7 @@ TEST(BitmapImage, writeText_case001)
   BitmapImage image(300, 50);
   ImageCanvas* canvas = image.getRefImageCanvas();
   ColorRGB BASE_COLOR{0x00, 0x50, 0x10};
-  image.clear(BASE_COLOR);
+  canvas->clear(BASE_COLOR);
 
   ColorRGB COLOR_LIST[] = {
       {0xff, 0x00, 0x00}, // 赤

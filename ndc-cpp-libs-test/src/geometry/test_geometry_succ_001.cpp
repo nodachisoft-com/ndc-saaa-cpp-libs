@@ -14,6 +14,7 @@ TEST(GeoCollision, powOfDistance_Point_To_LineSegment_succ001)
 TEST(GeoCollision, isInsideOfDistance_Point_To_LineSegment_succ001)
 {
   BitmapImage image(100, 100);
+  ImageCanvas *canvas = image.getRefImageCanvas();
   // 線分 (10,30)-(75,66) との距離が 7.0f 以内であるかを判定して色分けする
   bool isInside = false;
   Crc32 crc;
@@ -26,14 +27,14 @@ TEST(GeoCollision, isInsideOfDistance_Point_To_LineSegment_succ001)
       {
         // 茶色（道のイメージ）
         ColorRGB color{219, 182, 55};
-        image.set(u, v, color);
+        canvas->set(u, v, color);
         crc.calcUpdate('A');
       }
       else
       {
         // 青色
         ColorRGB color{0, 52, 192};
-        image.set(u, v, color);
+        canvas->set(u, v, color);
         crc.calcUpdate('X');
       }
     }
@@ -47,6 +48,7 @@ TEST(GeoCollision, isInsideOfDistance_Point_To_LineSegment_succ001)
 TEST(GeoCollision, isInsideOfDistance_Point_To_Circle_succ001)
 {
   BitmapImage image(100, 100);
+  ImageCanvas* canvas = image.getRefImageCanvas();
   // 中心点 (30,40)、半径 27 の範囲とそれ以外を色分けする
   bool isInside = false;
   Crc32 crc;
@@ -59,14 +61,14 @@ TEST(GeoCollision, isInsideOfDistance_Point_To_Circle_succ001)
       {
         // 茶色（道のイメージ）
         ColorRGB color{219, 182, 55};
-        image.set(u, v, color);
+        canvas->set(u, v, color);
         crc.calcUpdate('A');
       }
       else
       {
         // 青色
         ColorRGB color{0, 52, 192};
-        image.set(u, v, color);
+        canvas->set(u, v, color);
         crc.calcUpdate('X');
       }
     }

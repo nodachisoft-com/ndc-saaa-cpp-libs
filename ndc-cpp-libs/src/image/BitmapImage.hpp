@@ -10,7 +10,6 @@
 #include <cstdlib>
 
 #include "ImageCanvas.hpp"
-// #include "DebugFontData.hpp"
 #include "BitmapMetainfo.hpp"
 #include "ColorRGB.hpp"
 
@@ -30,16 +29,6 @@ namespace nl
 
     // Metainfo
     BitmapMetainfo metainfo;
-
-    //BitmapImage *fontImage = nullptr; // 文字描画のフォントデータ読み込み先
-    // std::string fontPath("debugfont.bmp"); // 読み込むフォントデータのパス
-    //int fontWidth = 11;  // フォントの幅サイズ(px)
-    //int fontHeight = 21; // フォントの高さ(px)
-
-    // bool initializeFontdata(); // フォントデータを読み込む
-
-
-
 
   public:
     /// @brief コンストラクタ
@@ -62,23 +51,23 @@ namespace nl
     /// @param[in] x 書き込む画像内の位置（左を原点とする）
     /// @param[in] y 書き込む画像内の位置（上を原点とする）
     /// @param[in] color 書き込む色情報（RGB）
-    void set(int x, int y, ColorRGB &color);
+    //void set(int x, int y, ColorRGB &color);
 
     /// @brief 指定の画像位置から色情報を取得する
     /// @param[in] x 書き込む画像内の位置（左を原点とする）
     /// @param[in] y 書き込む画像内の位置（上を原点とする）
     /// @return 取得した色情報（RGB）
-    ColorRGB get(int x, int y);
+    //ColorRGB get(int x, int y);
 
     /// @brief 画像の横方向ピクセル数を取得する
-    long getWidth();
+    //long getWidth();
 
     /// @brief 画像の縦方向ピクセル数を取得する
-    long getHeight();
+    //long getHeight();
 
     /// @brief 画像を指定の色で塗りつぶす
     /// @param[in] color 塗りつぶす色
-    void clear(ColorRGB &color);
+    //void clear(ColorRGB &color);
 
     /// @brief
     ///  等幅フォント（1文字当たり11px、高さ 21px）で文字を描画する。
@@ -87,7 +76,7 @@ namespace nl
     /// @param[in] y 文字を描画する開始位置 y 座標
     /// @param[in] text 描画する文字列
     /// @param[in] color フォントの色情報（RGB）
-    void writeText(const int x, const int y, const std::string text, ColorRGB &color);
+    //void writeText(const int x, const int y, const std::string text, ColorRGB &color);
 
     /// @brief
     ///  等幅フォント（1文字当たり11px、高さ 21px）で１文字を描画する。
@@ -96,7 +85,7 @@ namespace nl
     /// @param[in] y 文字を描画する開始位置 y 座標
     /// @param[in] oneText 描画する文字
     /// @param[in] color フォントの色情報（RGB）
-    void writeChar(const int x, const int y, const char oneText, ColorRGB &color);
+    //void writeChar(const int x, const int y, const char oneText, ColorRGB &color);
 
 
     /// <summary>
@@ -107,12 +96,6 @@ namespace nl
     {
       return imgp;
     }
-
-    /// <summary>
-    /// ImageCanvas 情報をコピーして BitmapImage にセットする
-    /// </summary>
-    /// <param name="imageCanvas">コピー元の ImageCanvas 参照</param>
-    //void setDeepCopyOfImageCanvas(ImageCanvas &imageCanvas);
 
   };
 };

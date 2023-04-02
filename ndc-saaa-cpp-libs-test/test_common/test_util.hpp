@@ -58,6 +58,7 @@ namespace TestUtil
     int width = hf->getWidth();
     int height = hf->getHeight();
     BitmapImage image(width, height);
+    ImageCanvas* canvas = image.getRefImageCanvas();
     Crc32 crc;
     for (int v = 0; v < height; v++)
     {
@@ -65,7 +66,7 @@ namespace TestUtil
       {
         float res = hf->getWithIgnoreOutOfRangeData(u, v);
         ColorRGB color = getColorByHeight(res);
-        image.set(u, v, color);
+        canvas->set(u, v, color);
         crc.calcUpdate(color.r);
         crc.calcUpdate(color.g);
         crc.calcUpdate(color.b);
@@ -100,6 +101,7 @@ namespace TestUtil
     int width = biomeType->getWidth();
     int height = biomeType->getHeight();
     BitmapImage image(width, height);
+    ImageCanvas* canvas = image.getRefImageCanvas();
     Crc32 crc;
     for (int v = 0; v < height; v++)
     {
@@ -107,7 +109,7 @@ namespace TestUtil
       {
         short biomeTypeNo = biomeType->getWithIgnoreOutOfRangeData(u, v);
         ColorRGB color = colorList[biomeTypeNo];
-        image.set(u, v, color);
+        canvas->set(u, v, color);
         crc.calcUpdate(color.r);
         crc.calcUpdate(color.g);
         crc.calcUpdate(color.b);
@@ -121,7 +123,7 @@ namespace TestUtil
       Biome biome = refBiomeList->at(i);
       if (biome.biomeAreaSize > biomeLabelSizeLargerThan)
       {
-        image.writeText((int)biome.centerPos.x, (int)biome.centerPos.y, biome.labelName, COLOR_RED);
+        canvas->writeText((int)biome.centerPos.x, (int)biome.centerPos.y, biome.labelName, COLOR_RED);
       }
     }
     image.WriteBmp(filepath);
