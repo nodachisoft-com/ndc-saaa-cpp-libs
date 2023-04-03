@@ -3,123 +3,13 @@
 
 using namespace nl;
 
-/*
-BitmapImage::BitmapImage(const std::string filename)
-  :BitmapImage(filename.c_str())
-{
-}
-
-BitmapImage::BitmapImage(const char *filename)
-{
-  // 8x8 サイズの画素で初期化する
-  //imgp = new ImageCanvas(8, 8);
-  metainfo.setSize(8,8);
-  ReadBmp(filename);
-}
-
-BitmapImage::BitmapImage(const int width, const int height)
-{
-  //imgp = new ImageCanvas(width, height);
-  metainfo.setSize(width, height);
-}
-*/
-
 BitmapImage::BitmapImage()
 {
 }
 
 BitmapImage::~BitmapImage()
 {
-  // 画像本体データを解放する
-  // delete imgp;
 }
-
-/*
-void BitmapImage::ReadBmp(const std::string filename)
-{
-  ReadBmp(filename.c_str());
-}
-
-void BitmapImage::ReadBmp(const char *filename)
-{
-  FILE* Bmp_Fp;
-  errno_t err = fopen_s(&Bmp_Fp, filename, "rb"); // バイナリモード読み込み用にオープン
-  if (err != 0) {
-      fprintf(stderr, "Error: file %s couldn\'t open for read!.\n", filename);
-      exit(1);
-  }
-  unsigned char *Bmp_Data;              // 画像データを1行分格納
-
-
-  // ヘッダ読み込み
-  unsigned char Bmp_headbuf[54] ={0};
-  char Bmp_type[2]={0};
-  int width = 0, height = 0;
-  int Bmp_color = 0;
-  fread(Bmp_headbuf, sizeof(unsigned char), BitmapMetainfo::HEADERSIZE, Bmp_Fp);
-
-  memcpy(&Bmp_type, Bmp_headbuf, sizeof(metainfo.Bmp_type));
-  if (strncmp(Bmp_type, "BM", 2) != 0)
-  {
-    fprintf(stderr, "Error: %s is not a bmp file.\n", filename);
-    exit(1);
-  }
-  memcpy(&width, Bmp_headbuf + 18, sizeof(int));
-  memcpy(&height, Bmp_headbuf + 22, sizeof(int));
-  if (width * height > BitmapMetainfo::MAX_IMAGE_MEMORY)
-  {
-    fprintf(
-      stderr,
-      "Error: Image Size is too large. size=%d. Size Limit(X*Y)=%d\n",
-      imgp->getWidth() * imgp->getHeight(),
-      BitmapMetainfo::MAX_IMAGE_MEMORY);
-    exit(1);
-  }
-
-
-  // キャンバスの削除
-  delete imgp;
-
-  // キャンバスの再確保
-  imgp = new ImageCanvas( width, height );
-  metainfo.setSize(width, height);
-
-  memcpy(&Bmp_color, Bmp_headbuf + 28, sizeof(Bmp_color));
-  if (Bmp_color != 24)
-  {
-    fprintf(stderr, "Error: Bmp_color = %d is not implemented in this program.\n", Bmp_color);
-    exit(1);
-  }
-
-  int real_width = width * 3 + width % 4; // 4byte 境界にあわせるために実際の幅の計算
-
-  // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
-  if ((Bmp_Data = (unsigned char *)calloc(real_width, sizeof(unsigned char))) == NULL)
-  {
-    fprintf(stderr, "Error: Memory allocation failed for Bmp_Data!\n");
-    exit(1);
-  }
-
-  // 画像データ読み込み
-  for (int i = 0; i < height; i++)
-  {
-    fread(Bmp_Data, 1, real_width, Bmp_Fp);
-    for (int j = 0; j < width; j++)
-    {
-      int x = j;
-      int y = height - i - 1; // BMP はデータと画像の Y 軸は反転
-      ColorRGB color(Bmp_Data[x * 3], Bmp_Data[x * 3 + 1], Bmp_Data[x * 3 + 2]);
-      imgp->set(x,y, color);
-    }
-  }
-
-  // 動的に確保した配列領域の解放
-  free(Bmp_Data);
-
-  // ファイルクローズ
-  fclose(Bmp_Fp);
-}
-*/
 
 std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const std::string filename)
 {
@@ -162,16 +52,8 @@ std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const char* filename)
     exit(1);
   }
 
-
-  // キャンバスの削除
-  // delete imgp;
-
-  // キャンバスの再確保
-  // imgp = new ImageCanvas(width, height);
   std::unique_ptr<ImageCanvas> imgp = std::make_unique<ImageCanvas>(width,height);
-
   metainfo.setSize(width, height);
-
   memcpy(&Bmp_color, Bmp_headbuf + 28, sizeof(Bmp_color));
   if (Bmp_color != 24)
   {
@@ -187,9 +69,6 @@ std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const char* filename)
     fprintf(stderr, "Error: Memory allocation failed for Bmp_Data!\n");
     exit(1);
   }
-
-
-
 
   // 画像データ読み込み
   for (int i = 0; i < height; i++)
