@@ -34,8 +34,8 @@ TEST(PerlinNoise1234, MT19937_HF_case002)
 {
   int width = 70;
   int height = 46;
-  BitmapImage image(width, height);
-  ImageCanvas* canvas = image.getRefImageCanvas();
+  ImageCanvas canvas(width, height);
+  BitmapImage image;
   PerlinNoise1234 pn(100);
   int noisePointX = 8;
   int noisePointY = 8;
@@ -49,10 +49,10 @@ TEST(PerlinNoise1234, MT19937_HF_case002)
       unsigned char color_elem = (unsigned char)res;
       crc.calcUpdate(color_elem);
       ColorRGB color{color_elem, color_elem, color_elem};
-      canvas->set(u, v, color);
+      canvas.set(u, v, color);
     }
   }
-  image.WriteBmp(TESTTMP_DIR + "MT19937_HF_case002.bmp");
+  image.WriteBmp(TESTTMP_DIR + "MT19937_HF_case002.bmp", canvas);
 
   // CRC32 を取得する
   FileAccessor fa(TESTTMP_DIR + "MT19937_HF_case002.bmp");

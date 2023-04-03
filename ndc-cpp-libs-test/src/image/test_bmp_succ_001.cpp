@@ -9,15 +9,14 @@ TEST(BitmapImage, case1)
 
   // 事前準備（テストファイル削除）
   FileAccessMgr::removefile(filepath);
-
-  BitmapImage image(16, 16);
-  ImageCanvas* canvas = image.getRefImageCanvas();
+  ImageCanvas canvas(16, 16);
+  BitmapImage image;
   for (int i = 0; i < 5; i++)
   {
     ColorRGB COLOR_RED{0xff, 0x00, 0x00};
-    canvas->set(i, 2, COLOR_RED);
+    canvas.set(i, 2, COLOR_RED);
   }
-  image.WriteBmp(filepath);
+  image.WriteBmp(filepath, canvas);
 
   // TODO: 正解ファイルとの HASH 値比較
 }
@@ -26,11 +25,13 @@ TEST(BitmapImage, case1)
 TEST(BitmapImage, case2)
 {
   std::string filepath(TESTTMP_DIR + "test_BitmapImage_case2.bmp");
-
   // 事前準備（テストファイル削除）
   FileAccessMgr::removefile(filepath);
-  BitmapImage image("..\\..\\ndc-cpp-libs-test\\src\\image\\test_bmp_001.bmp");
-  image.WriteBmp(filepath);
+  BitmapImage image;
+  std::unique_ptr<ImageCanvas> canvas =   
+    image.ReadBmp("..\\..\\ndc-cpp-libs-test\\src\\image\\test_bmp_001.bmp");
+
+  image.WriteBmp(filepath, *canvas.get());
 }
 
 // 画像データのヘッダー情報を確認する

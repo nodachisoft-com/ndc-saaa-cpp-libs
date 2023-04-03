@@ -14,8 +14,8 @@ TEST(NdcNoisedEdgeVoronoi, pos2_case001)
   int noisePx = 4, noisePy = 4;
   unsigned char typeRange = 3;
   long randomSeed = 100;
-  BitmapImage image(width, height);
-  ImageCanvas *canvas = image.getRefImageCanvas();
+  ImageCanvas canvas(width,height);
+  BitmapImage image;
   ColorRGB colorTable[4] = {
       {200, 0, 0}, {0, 200, 0}, {0, 0, 200}, {200, 200, 0}};
 
@@ -34,11 +34,11 @@ TEST(NdcNoisedEdgeVoronoi, pos2_case001)
         return;
       }
       crc.calcUpdate(res);
-      canvas->set(u, v, colorTable[res]);
+      canvas.set(u, v, colorTable[res]);
     }
   }
   // std::cout << "CRC=" << std::to_string(crc.getHash()) << std::endl;
-  image.WriteBmp(path);
+  image.WriteBmp(path, canvas);
   // std::cout << "WROTE BMP!" << std::endl;
   // EXPECT_EQ(crc.getHash(), 161513028); // データ本体部の CRC32
 }

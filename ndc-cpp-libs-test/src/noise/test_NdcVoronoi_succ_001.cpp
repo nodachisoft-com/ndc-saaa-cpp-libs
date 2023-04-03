@@ -14,8 +14,9 @@ TEST(NdcVoronoi, genMap_case001)
   int noisePx = 4, noisePy = 4;
   unsigned char typeRange = 3;
   long randomSeed = 100;
-  BitmapImage image(width, height);
-  ImageCanvas *canvas = image.getRefImageCanvas();
+  ImageCanvas canvas(width, height);
+  BitmapImage image;
+
   ColorRGB colorTable[4] = {
       {200, 0, 0}, {0, 200, 0}, {0, 0, 200}, {200, 200, 0}};
 
@@ -28,10 +29,10 @@ TEST(NdcVoronoi, genMap_case001)
     {
       unsigned char res = voro.pos2(u * noisePx / (float)width, v * noisePy / (float)height);
       crc.calcUpdate(res);
-      canvas->set(u, v, colorTable[res]);
+      canvas.set(u, v, colorTable[res]);
     }
   }
-  image.WriteBmp(path);
+  image.WriteBmp(path, canvas);
   EXPECT_EQ(crc.getHash(), 161513028); // データ本体部の CRC32
 }
 
@@ -43,8 +44,9 @@ TEST(NdcVoronoi, genMap_case002)
   int noisePx = 20, noisePy = 20;
   unsigned char typeRange = 3;
   long randomSeed = 101;
-  BitmapImage image(width, height);
-  ImageCanvas* canvas = image.getRefImageCanvas();
+  ImageCanvas canvas(width, height);
+  BitmapImage image;
+
   ColorRGB colorTable[4] = {
       {200, 0, 0}, {0, 200, 0}, {0, 0, 200}, {200, 200, 0}};
 
@@ -56,11 +58,11 @@ TEST(NdcVoronoi, genMap_case002)
     {
       unsigned char res = voro.pos2(u * noisePx / (float)width, v * noisePy / (float)height);
       crc.calcUpdate(res);
-      canvas->set(u, v, colorTable[res]);
+      canvas.set(u, v, colorTable[res]);
     }
   }
   EXPECT_EQ(crc.getHash(), 2484090371); // データ本体部の CRC32
-  image.WriteBmp(path);
+  image.WriteBmp(path, canvas);
 }
 
 // Voronoi 初期化での挙動確認
