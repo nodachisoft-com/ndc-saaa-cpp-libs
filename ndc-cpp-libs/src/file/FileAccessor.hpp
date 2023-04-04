@@ -2,10 +2,10 @@
  * @brief 個々のファイルの読み書き・ディレクトリを含むメタ情報の透過的管理の機能を提供する
  */
 #pragma once
-
-#include "../memory_bank/index.hpp"
 #include <string>
 #include <sys/stat.h>
+#include <filesystem>
+#include "../memory_bank/index.hpp"
 
 namespace nl
 {

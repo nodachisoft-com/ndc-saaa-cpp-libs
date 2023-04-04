@@ -33,7 +33,6 @@
     <ClInclude Include="src\exception\NdcBaseException.hpp" />
     <ClInclude Include="src\file\FileAccessMgr.hpp" />
     <ClInclude Include="src\file\FileAccessor.hpp" />
-    <ClInclude Include="src\file\FileApiConvert.hpp" />
     <ClInclude Include="src\file\index.hpp" />
     <ClInclude Include="src\geometry\GeoCollision.hpp" />
     <ClInclude Include="src\geometry\index.hpp" />
@@ -93,7 +92,6 @@
     <ClCompile Include="src\exception\NdcBaseException.cpp" />
     <ClCompile Include="src\file\FileAccessMgr.cpp" />
     <ClCompile Include="src\file\FileAccessor.cpp" />
-    <ClCompile Include="src\file\FileApiConvert.cpp" />
     <ClCompile Include="src\geometry\GeoCollision.cpp" />
     <ClCompile Include="src\geometry\Rectangle2d.cpp" />
     <ClCompile Include="src\geometry\Vector2d.cpp" />

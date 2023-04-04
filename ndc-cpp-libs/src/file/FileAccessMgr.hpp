@@ -2,25 +2,19 @@
  * @brief Windows や Linux の OS の差を吸収したファイル操作・情報を取得する機能を提供する
  */
 #pragma once
-#include "FileApiConvert.hpp"
-#include "FileAccessor.hpp"
-
-#include <string>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-
 #include <filesystem>
 #include <iostream>
+#include "FileAccessor.hpp"
 
-#if defined(__GNUC__)
-#include <dirent.h>
-#endif
 
 
 namespace nl
 {
+
   /// @brief ファイルアクセス用機能を提供するクラス
   class FileAccessMgr
   {
@@ -56,7 +50,7 @@ namespace nl
     /// @brief 指定したパスのメタ情報（ファイルサイズ、ファイル種別（Dir / File / Not found）、読み書き用クラスを返す
     /// @param[in] path ファイル/ディレクトリへの絶対パス / 相対パス
     /// @return ファイルのメタ情報・読み書き用クラス
-    static FileAccessor getFileInfo(std::string pathe);
+    static FileAccessor getFileInfo(std::string path);
 
     /// @brief カレントディレクトリの絶対パスを取得する
     /// @return カレントディレクトリの絶対パス（文字列）
@@ -72,19 +66,5 @@ namespace nl
     /// @return ディレクトリ配下のディレクトリ一覧
     static std::vector<FileAccessor> getDirsRecursively(std::string dirPath);
 
-  private:
-    /// @brief 再帰処理にてディレクトリを探索し、見つけたファイルを一覧に追加して返す。
-    /// @param dirPath 探索を行うパス（ディレクトリ）
-    /// @param filelist 見つけたファイル一覧の追記先
-    /// @return ファイル一覧
-    // static std::vector<FileAccessor> _getInnerFilesRecursively(std::string dirPath, std::vector<FileAccessor> &filelist);
-    // static std::vector<FileAccessor> _getInnerFilesRecursively(std::string dirPath);
-
-    /// @brief 再帰処理にてディレクトリを探索し、見つけたディレクトリを一覧に追加して返す。
-    /// @param dirPath 探索を行うパス（ディレクトリ）
-    /// @param dirlist 見つけたディレクトリ一覧の追記先
-    /// @return ディレクトリ一覧
-    // static std::vector<FileAccessor> _getInnerDirsRecursively(std::string dirPath, std::vector<FileAccessor> &dirlist);
-    // static std::vector<FileAccessor> _getInnerDirsRecursively(std::string dirPath);
   };
 }

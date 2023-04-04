@@ -166,9 +166,6 @@
     <ClInclude Include="src\file\FileAccessor.hpp">
       <Filter>src\file</Filter>
     </ClInclude>
-    <ClInclude Include="src\file\FileApiConvert.hpp">
-      <Filter>src\file</Filter>
-    </ClInclude>
     <ClInclude Include="src\file\index.hpp">
       <Filter>src\file</Filter>
     </ClInclude>
@@ -298,9 +295,6 @@
       <Filter>src\file</Filter>
     </ClCompile>
     <ClCompile Include="src\file\FileAccessor.cpp">
-      <Filter>src\file</Filter>
-    </ClCompile>
-    <ClCompile Include="src\file\FileApiConvert.cpp">
       <Filter>src\file</Filter>
     </ClCompile>
     <ClCompile Include="src\timewatch\ScheduleTask.cpp">

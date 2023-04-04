@@ -1,5 +1,5 @@
 ﻿#include "FileAccessor.hpp"
-#include "FileAccessMgr.hpp"
+
 
 using namespace nl;
 
@@ -14,27 +14,31 @@ FileAccessor::FileAccessor(std::string _filepath)
 
   memory = new MemoryBank();
 
-  struct stat st;
-  int statResult = stat(_filepath.c_str(), &st);
-  if (statResult != 0)
+  std::filesystem::path path(filePath);
+  if (std::filesystem::is_directory(path))
   {
-    // 読み取りエラー
-    filetype = FileType::FILE_NOT_FOUND;
+    filetype = FileType::DIR;
   }
-  filetype = FileAccessMgr::isExistFileOrDir(_filepath); // ファイルタイプ取得
-  if (filetype == FileType::FILE)
+  else if (std::filesystem::is_regular_file(path))
   {
-    filesize = st.st_size; // ファイルサイズ取得
+    filetype = FileType::FILE;
+    struct stat st;
+    int statResult = stat(_filepath.c_str(), &st);
+    if (statResult != 0)
+    {
+      // 読み取りエラー
+      filetype = FileType::FILE_NOT_FOUND;
+    } else {
+      filesize = st.st_size; // ファイルサイズ取得
+    }
+  }
+  else {
+    filetype = FileType::FILE_NOT_FOUND;
   }
 }
 
 FileAccessor::~FileAccessor()
 {
-  // if (appendWriteFp != NULL)
-  //{
-  //  追記モードを利用していた場合はファイルへのポインタを解放する
-  //  fclose(appendWriteFp);
-  //}
 }
 
 unsigned long FileAccessor::calcMemoryCrc32()
@@ -55,16 +59,8 @@ bool FileAccessor::readFileSync()
   errno_t err = fopen_s(&fp, filePath.c_str(), "rb");
   if (err != 0) {
       // ファイルオープンエラーの処理
-      // printf("Failed to open file.\n");
       return false;
   }
-
-  //FILE *fp = fopen(filePath.c_str(), "rb");
-  //if (fp == NULL)
-  //{
-    // ファイルオープンエラーの処理
-    //return false;
-  //}
 
   // ファイルサイズの取得
   if (fseek(fp, 0, SEEK_END) != 0)
@@ -119,7 +115,6 @@ bool FileAccessor::writeFileSync()
     return false;
   }
 
-  //FILE *fp = fopen(filePath.c_str(), "wb");
   long size = memory->getUsingSize();
 
   for (int i = 0; i < size; i++)
@@ -189,13 +184,6 @@ bool FileAccessor::appendStringToFileSync(const std::string filepath, const std:
     return false;
   }
 
-
-  //FILE *appendWriteFp = fopen(filepath.c_str(), "ab");
-  //if (appendWriteFp == NULL)
-  //{
-    // ハンドラ取得失敗
-    //return false;
-  //}
   size_t size = text.size();
   for (size_t i = 0; i < size; i++)
   {
