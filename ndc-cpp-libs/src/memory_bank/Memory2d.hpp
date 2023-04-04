@@ -54,7 +54,7 @@ namespace nl
       return true;
     }
 
-    void resizeMemory(const int _width, const int _height)
+    void resizeMemory(int _width, int _height)
     {
       if (buf != nullptr)
       {
@@ -68,7 +68,7 @@ namespace nl
         width = _width;
         height = _height;
       }
-      catch (std::bad_alloc)// &ex)
+      catch (std::bad_alloc)
       {
         std::string msg("Memory2d: Failed To Allocate Memory!");
         throw OutOfMemoryException(msg);

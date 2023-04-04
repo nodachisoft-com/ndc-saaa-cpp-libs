@@ -164,7 +164,6 @@ void MemoryBank::read(X &value)
   {
     mem[i] = readChar();
   }
-  // return result;
 }
 template void MemoryBank::read<char>(char &v);
 template void MemoryBank::read<short>(short &v);
@@ -329,8 +328,8 @@ int MemoryBank::getUsingSize()
 unsigned long MemoryBank::calcCrc32()
 {
   Crc32 crc;
-  long long length = getUsingSize();
-  for (long long i = 0; i < length; i++)
+  int length = getUsingSize();
+  for (int i = 0; i < length; i++)
   {
     crc.calcUpdate(get(i));
   }

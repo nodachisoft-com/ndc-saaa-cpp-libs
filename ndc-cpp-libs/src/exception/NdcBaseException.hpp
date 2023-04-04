@@ -59,4 +59,10 @@ namespace nl
   {
     using NdcBaseException::NdcBaseException;
   };
+
+  /// @brief 想定外の IO 起因による例外を検知
+  class IOException : public NdcBaseException
+  {
+    using NdcBaseException::NdcBaseException;
+  };
 };

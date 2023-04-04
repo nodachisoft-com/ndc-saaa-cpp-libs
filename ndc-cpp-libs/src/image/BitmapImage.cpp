@@ -21,8 +21,10 @@ std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const char* filename)
   FILE* Bmp_Fp;
   errno_t err = fopen_s(&Bmp_Fp, filename, "rb"); // バイナリモード読み込み用にオープン
   if (err != 0) {
-    fprintf(stderr, "Error: file %s couldn\'t open for read!.\n", filename);
-    exit(1);
+    // ファイル読み込み失敗
+    std::stringstream ss;
+    ss << "BitmapImage::ReadBmp File Open Failed. File=" << filename;
+    throw IOException(ss.str());
   }
   unsigned char* Bmp_Data;              // 画像データを1行分格納
 
@@ -37,19 +39,22 @@ std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const char* filename)
   memcpy(&Bmp_type, Bmp_headbuf, sizeof(metainfo.Bmp_type));
   if (strncmp(Bmp_type, "BM", 2) != 0)
   {
-    fprintf(stderr, "Error: %s is not a bmp file.\n", filename);
-    exit(1);
+    std::stringstream ss;
+    ss << "BitmapImage::ReadBmp The file is not BMP file. File=" << filename;
+    throw IOException(ss.str());
   }
   memcpy(&width, Bmp_headbuf + 18, sizeof(int));
   memcpy(&height, Bmp_headbuf + 22, sizeof(int));
   if (width * height > BitmapMetainfo::MAX_IMAGE_MEMORY)
   {
-    fprintf(
-      stderr,
-      "Error: Image Size is too large. size=%d. Size Limit(X*Y)=%d\n",
-      width, height,
-      BitmapMetainfo::MAX_IMAGE_MEMORY);
-    exit(1);
+    // 読み込み画像サイズの上限を超えている場合
+    std::stringstream ss;
+    ss << "BitmapImage::ReadBmp Too Large BMP file. "
+      << "BMP file size is (" << width << "," << height << "). "
+      << "Readable width * height limit is "
+      << BitmapMetainfo::MAX_IMAGE_MEMORY << ". "
+      << "File = " << filename;
+    throw IOException(ss.str());
   }
 
   std::unique_ptr<ImageCanvas> imgp = std::make_unique<ImageCanvas>(width,height);
@@ -57,17 +62,23 @@ std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const char* filename)
   memcpy(&Bmp_color, Bmp_headbuf + 28, sizeof(Bmp_color));
   if (Bmp_color != 24)
   {
-    fprintf(stderr, "Error: Bmp_color = %d is not implemented in this program.\n", Bmp_color);
-    exit(1);
+    // 24 ビットカラー以外の画像データは受け付けない
+    std::stringstream ss;
+    ss << "BitmapImage::ReadBmp "
+      << "only can read 24bit depth color. the file color depth=" << Bmp_color;
+    throw IOException(ss.str());
   }
+  // 4byte 境界にあわせるために実際の幅の計算
+  int real_width = metainfo.calcRealImagefileWidth();
 
-  int real_width = width * 3 + width % 4; // 4byte 境界にあわせるために実際の幅の計算
-
-  // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
+  
   if ((Bmp_Data = (unsigned char*)calloc(real_width, sizeof(unsigned char))) == NULL)
   {
-    fprintf(stderr, "Error: Memory allocation failed for Bmp_Data!\n");
-    exit(1);
+    // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
+    std::stringstream ss;
+    ss << "BitmapImage::ReadBmp "
+      << "Memory allocation failed for 1row of imagedata.";
+    throw IOException(ss.str());
   }
 
   // 画像データ読み込み
@@ -104,8 +115,10 @@ void BitmapImage::WriteBmp(const char *filename,  ImageCanvas& canvas)
   errno_t err = fopen_s(&Out_Fp, filename, "wb");
 
   if (err != 0) {
-    fprintf(stderr, "Error: file %s couldn\'t open for read!.\n", filename);
-    exit(1);
+    // ファイル読み込み失敗
+    std::stringstream ss;
+    ss << "BitmapImage::WriteBmp File open failed as write-mode. File=" << filename;
+    throw IOException(ss.str());
   }
 
   unsigned char* Bmp_Data; // 画像データを1行分格納
@@ -119,11 +132,13 @@ void BitmapImage::WriteBmp(const char *filename,  ImageCanvas& canvas)
   metainfo.setSize( canvas.getWidth(), canvas.getHeight());
   int real_width = metainfo.calcRealImagefileWidth();
 
-  // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
   if ((Bmp_Data = (unsigned char *)calloc(real_width, sizeof(unsigned char))) == NULL)
   {
-    fprintf(stderr, "Error: Memory allocation failed for Bmp_Data!\n");
-    exit(1);
+    // 配列領域の動的確保. 失敗した場合はエラーメッセージを出力して終了
+    std::stringstream ss;
+    ss << "BitmapImage::ReadBmp "
+      << "Memory allocation failed for 1row of imagedata.";
+    throw IOException(ss.str());
   }
 
   uint8_t *buf = metainfo.getBmpFileHeader();
@@ -138,15 +153,10 @@ void BitmapImage::WriteBmp(const char *filename,  ImageCanvas& canvas)
     {
       int x = j;
       int y = metainfo.Bmp_height - i - 1; // BMP はデータと画像の Y 軸は反転
-
       ColorRGB color = canvas.get(x,y);
       Bmp_Data[x * 3] = color.b;
       Bmp_Data[x * 3+1] = color.g;
       Bmp_Data[x * 3+2] = color.r;
-    }
-    for (int j = metainfo.Bmp_width * 3; j < real_width; j++)
-    {
-      Bmp_Data[j] = 0;
     }
     fwrite(Bmp_Data, sizeof(unsigned char), real_width, Out_Fp);
   }
@@ -167,8 +177,10 @@ void BitmapImage::PrintBmpInfo(const char *filename)
   // バイナリモード読み込み用にオープン
   errno_t err = fopen_s(&Bmp_Fp, filename, "rb");
   if (err != 0) {
-    fprintf(stderr, "Error: file %s couldn\'t open for write!.\n", filename);
-    exit(1);
+    // ファイル読み込み失敗
+    std::stringstream ss;
+    ss << "BitmapImage::WriteBmp File open failed as read-mode. File=" << filename;
+    throw IOException(ss.str());
   }
 
   unsigned char Bmp_headbuf[54] ={0};

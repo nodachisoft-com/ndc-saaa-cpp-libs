@@ -6,13 +6,14 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-// #include <stdlib.h>
 #include <cstdlib>
 #include <memory>
 
+#include "../log/Logger.hpp"
 #include "ImageCanvas.hpp"
 #include "BitmapMetainfo.hpp"
 #include "ColorRGB.hpp"
+#include "../exception/index.hpp"
 
 
 
@@ -25,50 +26,24 @@ namespace nl
   {
   private:
 
-    /// 画像データ本体
-    //ImageCanvas* imgp = nullptr;
-
     // Metainfo
     BitmapMetainfo metainfo;
 
   public:
     /// @brief コンストラクタ
-    //BitmapImage(const std::string filename);
-    //BitmapImage(const char *filename);
-    //BitmapImage(const int width, const int height);
     BitmapImage();
 
 
     /// デストラクタ
     ~BitmapImage();
 
-    // 操作
-    //void ReadBmp(const std::string filename);
-    //void ReadBmp(const char *filename);
-
-    // TODO : ImageCanvas を In/Out する モジュール化する
     std::unique_ptr<ImageCanvas> ReadBmp(const std::string filename);
     std::unique_ptr<ImageCanvas> ReadBmp(const char* filename);
-
-    //void WriteBmp(const std::string filename);
-    //void WriteBmp(const char *filename);
-
     void WriteBmp(const std::string filename, ImageCanvas &canvas);
     void WriteBmp(const char* filename, ImageCanvas &canvas);
 
-
-
     void PrintBmpInfo(const std::string filename);
     void PrintBmpInfo(const char *filename);
-
-    /// <summary>
-    /// BitmapImage に保持されている ImageCanvas への参照を取得する
-    /// </summary>
-    /// <returns>ImageCanvas への参照</returns>
-    //ImageCanvas* getRefImageCanvas()
-    // {
-    //  return imgp;
-    //}
 
   };
 };
