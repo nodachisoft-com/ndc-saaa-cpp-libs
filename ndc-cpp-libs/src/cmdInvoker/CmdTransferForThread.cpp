@@ -1,18 +1,18 @@
-﻿#include "CmdTransferForThread.hpp"
+﻿#include <memory>
+#include "CmdTransferForThread.hpp"
 
-void CmdTransferForThread::appendCmd(CmdBase *elem)
+void CmdTransferForThread::appendCmd(std::unique_ptr<CmdBase> elem)
 {
-  cmdQueue.push_back(elem);
+  cmdQueue.push_back(std::move(elem));
 }
 
-CmdBase *CmdTransferForThread::readNextCmd()
+std::unique_ptr<CmdBase> CmdTransferForThread::readNextCmd()
 {
-  std::size_t size = cmdQueue.size();
-  if (size > 0)
-  {
-    CmdBase *result = cmdQueue[0];
-    cmdQueue.pop_front();
-    return result;
+  if (cmdQueue.empty()) {
+    return nullptr;
   }
-  return nullptr;
+  std::unique_ptr<CmdBase> result = std::move(cmdQueue.front());
+  cmdQueue.pop_front();
+  return result;
+
 }

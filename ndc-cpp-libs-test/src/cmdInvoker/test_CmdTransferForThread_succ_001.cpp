@@ -1,4 +1,5 @@
 ﻿#include <string>
+#include <memory>
 #include "../../pch.h"
 
 
@@ -10,18 +11,17 @@ TEST(CmdTransferForThread, append_readNext_case1)
 {
   // From MainUI
   CmdTransferForThread cmdTransfer;
-  cmdTransfer.appendCmd(new ExitForceCmd());
+  cmdTransfer.appendCmd(std::make_unique<ExitForceCmd>());
 
   // Brain UI cmdInvoker シミュレータ
   while (true)
   {
-    CmdBase *cmd = cmdTransfer.readNextCmd();
+    std::unique_ptr<CmdBase> cmd = cmdTransfer.readNextCmd();
     if (cmd == nullptr)
     {
       // コマンドがなくなったので終了
       break;
     }
     cmd->_EntryExec();
-    delete (cmd);
   }
 }
