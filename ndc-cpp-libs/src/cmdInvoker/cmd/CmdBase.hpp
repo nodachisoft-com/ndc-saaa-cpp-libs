@@ -1,10 +1,13 @@
 ﻿#pragma once
 
-class CmdBase
+namespace nl
 {
-public:
-  CmdBase() {}
-  virtual void appExec(){};
-  void _EntryExec() { appExec(); }
-  virtual ~CmdBase() {}
-};
+  class CmdBase
+  {
+  public:
+    CmdBase() {}
+    virtual void appExec(){};
+    void _EntryExec() { appExec(); }
+    virtual ~CmdBase() {}
+  };
+}

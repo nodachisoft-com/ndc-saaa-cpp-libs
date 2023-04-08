@@ -1,5 +1,7 @@
 ﻿#include "ExitForceCmd.hpp"
 
+using namespace nl;
+
 ExitForceCmd::ExitForceCmd()
 {
 }

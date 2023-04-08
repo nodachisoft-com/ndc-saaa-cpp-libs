@@ -88,6 +88,9 @@
     <ClCompile Include="src\memory_bank\test_Memory2d_succ_001.cpp">
       <Filter>src\memory_bank</Filter>
     </ClCompile>
+    <ClCompile Include="src\cmdInvoker\test_CmdTransferThreadMgr_succ_001.cpp">
+      <Filter>src\cmdInvoker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

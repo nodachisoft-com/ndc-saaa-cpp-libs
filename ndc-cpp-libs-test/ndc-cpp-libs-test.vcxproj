@@ -44,6 +44,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\cmdInvoker\test_CmdTransferForThread_succ_001.cpp" />
+    <ClCompile Include="src\cmdInvoker\test_CmdTransferThreadMgr_succ_001.cpp" />
     <ClCompile Include="src\csv\test_CSVReader_succ_001.cpp" />
     <ClCompile Include="src\dbtable\test_DBTable_succ_001.cpp" />
     <ClCompile Include="src\file\test_FileAccessor_succ_001.cpp" />

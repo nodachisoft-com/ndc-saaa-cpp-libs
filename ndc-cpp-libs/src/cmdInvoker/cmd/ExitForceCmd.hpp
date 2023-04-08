@@ -1,11 +1,15 @@
 ﻿#pragma once
-#include "CmdBase.hpp"
 #include <iostream>
+#include "CmdBase.hpp"
 
-class ExitForceCmd : public CmdBase
+
+namespace nl
 {
-public:
-  ExitForceCmd();
-  ~ExitForceCmd();
-  void appExec() override;
-};
+  class ExitForceCmd : public CmdBase
+  {
+  public:
+    ExitForceCmd();
+    ~ExitForceCmd();
+    void appExec() override;
+  };
+}

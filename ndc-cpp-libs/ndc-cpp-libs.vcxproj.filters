@@ -256,6 +256,9 @@
     <ClInclude Include="src\image\index.hpp">
       <Filter>src\image</Filter>
     </ClInclude>
+    <ClInclude Include="src\cmdInvoker\CmdTransferThreadMgr.hpp">
+      <Filter>src\cmdInvoker</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hash\Crc32.cpp">

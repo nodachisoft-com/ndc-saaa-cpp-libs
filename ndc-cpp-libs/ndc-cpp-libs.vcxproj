@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\cmdInvoker\CmdTransferForThread.hpp" />
+    <ClInclude Include="src\cmdInvoker\CmdTransferThreadMgr.hpp" />
     <ClInclude Include="src\cmdInvoker\cmd\CmdBase.hpp" />
     <ClInclude Include="src\cmdInvoker\cmd\ExitForceCmd.hpp" />
     <ClInclude Include="src\cmdInvoker\cmd\index.hpp" />

@@ -1,6 +1,8 @@
 ﻿#include <memory>
 #include "CmdTransferForThread.hpp"
 
+using namespace nl;
+
 void CmdTransferForThread::appendCmd(std::unique_ptr<CmdBase> elem)
 {
   cmdQueue.push_back(std::move(elem));
