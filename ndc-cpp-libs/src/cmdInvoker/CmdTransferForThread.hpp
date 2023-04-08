@@ -55,14 +55,17 @@ namespace nl
     {
       int i = 1000;
       while ( i-- > 0 ) {
-        //std::cout << "UID[" << uid << "] RUN. cmd Queue=" << cmdQueue.size() << std::endl;
-        std::unique_ptr<CmdBase> cmd = readNextCmd();
+        std::cout << "UID[" << uid << "] RUN. cmd Queue=" << cmdQueue.size() << std::endl;
+        
+        /*
+        std::unique_ptr<CmdBase> cmd = readNextCmd(); // ここが マルチスレッド未対応？
         if (!cmd)
         {
           // コマンドがなくなったので終了
 
         }
         cmd->_EntryExec();
+        */
 
 
 
