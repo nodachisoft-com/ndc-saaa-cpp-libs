@@ -10,14 +10,14 @@ using namespace std::literals::string_literals;
 TEST(CmdTransferForThread, append_readNext_case1)
 {
   // From MainUI
-  CmdTransferForThread cmdTransfer;
+  CmdTransferForThread cmdTransfer(0);
   cmdTransfer.appendCmd(std::make_unique<ExitForceCmd>());
 
   // Brain UI cmdInvoker シミュレータ
   while (true)
   {
     std::unique_ptr<CmdBase> cmd = cmdTransfer.readNextCmd();
-    if (cmd == nullptr)
+    if (!cmd)
     {
       // コマンドがなくなったので終了
       break;

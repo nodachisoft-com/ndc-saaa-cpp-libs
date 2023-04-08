@@ -1,6 +1,6 @@
 ﻿#include <string>
-//#include <memory>
-//#include <chrono>
+#include <memory>
+#include <chrono>
 #include "../../pch.h"
 //#include "../../../ndc-cpp-libs/src/cmdInvoker/CmdTransferThreadMgr.hpp"
 
@@ -8,30 +8,25 @@
 using namespace nl;
 using namespace std::literals::string_literals;
 
+
 /*
-std::vector<CmdTransferForThread> list;
-std::vector<std::thread> threadList;
-
-void _runThread()
-{
-  // 外部から Thread にアクセス可能とする
-  CmdTransferForThread cmd;
-  list.push_back(cmd);
-
-  // Thread 処理を開始
-  cmd.doMainLoop();
-}
-*/
 class A;
-std::vector<A> list;
-std::vector<std::thread> thlist;
+
+//std::vector<std::thread> thlist;
+static std::vector<A> list;
 
 class A {
+  private:
+
+    std::thread th;
+
   public:
+
     bool finishFlag ;
-    A() : finishFlag(false) {
-      list.clear();
-      thlist.clear();
+    A() : finishFlag(false)
+      , th(&A::createThread, this)
+    {
+
     }
     void run()
     {
@@ -39,25 +34,23 @@ class A {
         std::cout << "RUN" << std::endl;
         if (finishFlag)
         {
+          std::cout << "FINISH!" << std::endl;
           return;
         }
         std::this_thread::sleep_for(std::chrono::microseconds(10));
+        // return;
       }
     }
 
-    static void createThread(A &a)
+    static void createThread(A *a)
     {
-      a.run();
+      a->run();
     }
 
-    void createNewThread()
+    static void createNewThread()
     {
-      A a;
-      list.push_back(a);
-
-      thlist.emplace_back(std::thread(&A::createThread, a));
-      //std::thread th(createThread, a);
-      // thlist.push_back(th);
+      
+     list.push_back(A());
     }
 
     static void endThreads()
@@ -67,7 +60,7 @@ class A {
         list[i].endThread();
       }
       for (size_t i = 0; i < threadCount; i++) {
-        thlist[i].join();
+        list[i].th.join();
       }
     }
 
@@ -77,25 +70,20 @@ class A {
       finishFlag = true;
     }
 };
-
-
+*/
 
 
 
 // Thread 用のコマンド転送用の送信・受信を直列実行する
 TEST(CmdTransferThreadMgr, case1)
 {
-  // CmdTransferThreadMgr mgr;
-  //mgr.runCmdTransferThraed();
+  std::cout << "START" << std::endl;
+  CmdTransferForThread::initThread();
+  for ( int i = 0 ; i < 10 ; i++){
+    CmdTransferForThread::createNewThread(i);
+  }
+  CmdTransferForThread::endThreads();
 
-  A a;
-
-
-  std::this_thread::sleep_for(std::chrono::microseconds(1000));
-  //mgr.finishAllThread();
-
-
-
-  std::cout << "test" << std::endl;
-
+  FAIL();
 }
+

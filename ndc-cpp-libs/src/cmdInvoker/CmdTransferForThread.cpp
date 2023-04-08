@@ -6,6 +6,7 @@ using namespace nl;
 void CmdTransferForThread::appendCmd(std::unique_ptr<CmdBase> elem)
 {
   cmdQueue.push_back(std::move(elem));
+  std::cout << "cmd Appended." << std::endl;
 }
 
 std::unique_ptr<CmdBase> CmdTransferForThread::readNextCmd()
