@@ -11,7 +11,6 @@ namespace nl
   class CmdTransferForThread;
 
   /// @brief CmdInvoker を動作させるスレッド一覧を管理
-  // static std::vector<CmdTransferForThread *> threadList;
   static std::vector<std::unique_ptr<CmdTransferForThread>> threadList;
 
 
@@ -25,27 +24,39 @@ namespace nl
     /// @brief true ならスレッド内ループが自律的に終了する
     bool endThreadFlag;
 
-
+    /// @brief
+    ///   スレッドを特定するための UID.
     int uid;
 
-  public:
+    /// @bried
+    ///   MainThread で動作するなら true でセットされる
+    bool mainThread;
+
+    /// @brief スレッド動作時に使用。MainThread の場合は使用しない
     std::thread th;
 
-    CmdTransferForThread(int uid)
+  public:
+
+
+    CmdTransferForThread(int uid, bool isMainThread)
       : cmdQueue()
        ,endThreadFlag(false)
        ,uid(uid)
-       // , th(&CmdTransferForThread::createThread, *this)
     {
       cmdQueue.clear();
-      std::cout << "UID[" <<uid << "]cmdQueue cleared." << cmdQueue.size() << std::endl;
-
-      th = std::thread(CmdTransferForThread::createThread, this);
+      if (isMainThread)
+      {
+        // Main Thread 用のコンストラクタとして初期化処理する
+        //std::cout << "UID[" << uid << "] is initialized as Main Thread." << std::endl;
+      } else {
+        // Thread として起動してループ動作を行う
+        //std::cout << "UID[" << uid << "]cmdQueue cleared." << cmdQueue.size() << std::endl;
+        th = std::thread(CmdTransferForThread::createThread, this);
+      }
+      mainThread = isMainThread;
     }
-       /*
-    ~CmdTransferForThread() {
-      std::cout << "CmdTransferForThread Destruction" << std::endl;
-    }*/
+
+ 
     std::unique_ptr<CmdBase> readNextCmd();
 
     /// <summary>
@@ -53,29 +64,21 @@ namespace nl
     /// </summary>
     void doMainLoop()
     {
-      int i = 1000;
-      while ( i-- > 0 ) {
-        std::cout << "UID[" << uid << "] RUN. cmd Queue=" << cmdQueue.size() << std::endl;
-        
-        /*
+      while ( true ) {
+        // std::cout << "UID[" << uid << "] RUN. cmd Queue=" << cmdQueue.size() << std::endl;
         std::unique_ptr<CmdBase> cmd = readNextCmd(); // ここが マルチスレッド未対応？
-        if (!cmd)
+        if (cmd)
         {
-          // コマンドがなくなったので終了
-
+          // コマンドが存在する
+          cmd->_EntryExec();
         }
-        cmd->_EntryExec();
-        */
-
-
 
         if (endThreadFlag)
         {
           // 終了フラグが立っていたため、処理を終了させる
-          std::cout << "UID[" << uid << "]FINISH!" << std::endl;
           return;
         }
-        std::this_thread::sleep_for(std::chrono::microseconds(1000 * 10));
+        std::this_thread::sleep_for(std::chrono::microseconds(1));
       }
     }
   public: // 外部からアクセスが許されるメソッド
@@ -86,42 +89,47 @@ namespace nl
     /// <param name="elem">追加するコマンド</param>
     void appendCmd(std::unique_ptr<CmdBase> elem);
 
-    //void finishRunning()
-    //{
-    //  endThreadFlag = true;
-    //}
     static void initThread()
     {
       threadList.clear();
-      std::cout << "CmdTransfer Thread Cleared." << std::endl;
+      // std::cout << "CmdTransfer Thread Cleared." << std::endl;
     }
 
 
     static void createThread(CmdTransferForThread *a)
     {
-      
       a->doMainLoop();
     }
 
-    static void createNewThread(int uid)
+    static void createAsNewThread(int uid)
     {
-      threadList.push_back(std::make_unique<CmdTransferForThread>(uid));
+      threadList.push_back(std::make_unique<CmdTransferForThread>(uid, false));
     }
+
+    static void addThreadListAsMainThread(std::unique_ptr<CmdTransferForThread> a)
+    {
+      threadList.push_back(std::move(a));
+    }
+
 
     static void endThreads()
     {
-      std::cout << "Call endThreads." << std::endl;
+      
       size_t threadCount = threadList.size();
+      //std::cout << "Call endThreads. thread count=" << threadCount << std::endl;
       for (size_t i = 0; i < threadCount; i++) {
-        threadList[i]->endThread();
+        if ( !threadList[i]->mainThread )
+        {
+          threadList[i]->endThread();
+        }
       }
-      std::cout << "Wait threas join()" << std::endl;
+      //std::cout << "Wait threas join()" << std::endl;
       for (size_t i = 0; i < threadCount; i++) {
-        threadList[i]->th.join();
+        if (!threadList[i]->mainThread)
+        {
+          threadList[i]->th.join();
+        }
       }
-      //for (size_t i = 0; i < threadCount; i++) {
-      //  delete threadList[i];
-      //}
     }
 
   private:

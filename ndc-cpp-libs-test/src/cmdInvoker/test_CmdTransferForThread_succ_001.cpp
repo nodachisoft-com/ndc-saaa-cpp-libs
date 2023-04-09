@@ -10,8 +10,11 @@ using namespace std::literals::string_literals;
 TEST(CmdTransferForThread, append_readNext_case1)
 {
   // From MainUI
-  CmdTransferForThread cmdTransfer(0);
+  CmdTransferForThread cmdTransfer(0,true);
   cmdTransfer.appendCmd(std::make_unique<ExitForceCmd>());
+
+
+  int cmdExeCount = 0;
 
   // Brain UI cmdInvoker シミュレータ
   while (true)
@@ -22,6 +25,13 @@ TEST(CmdTransferForThread, append_readNext_case1)
       // コマンドがなくなったので終了
       break;
     }
-    cmd->_EntryExec();
+    cmdExeCount++;
   }
+
+
+  //CmdTransferForThread::endThreads();
+  std::cout << "test" << std::endl;
+
+  // 1件のコマンドが実行された
+  EXPECT_EQ(cmdExeCount, 1);
 }
