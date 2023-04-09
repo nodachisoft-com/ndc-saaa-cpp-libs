@@ -37,7 +37,12 @@ namespace nl
 
   public:
 
-
+    /// @brief
+    ///   コンストラクタでキューを初期化する。
+    ///   isMainThread が true なら Thread でのループ実行は行わない
+    ///   isMainThread が false なら初期化のみ。
+    /// @param uid Thread ごとにユニークな ID をセットする
+    /// @param isMainThread MainThread として使用するなら true
     CmdTransferForThread(int uid, bool isMainThread)
       : cmdQueue()
        ,endThreadFlag(false)
@@ -95,12 +100,6 @@ namespace nl
       // std::cout << "CmdTransfer Thread Cleared." << std::endl;
     }
 
-
-    static void createThread(CmdTransferForThread *a)
-    {
-      a->doMainLoop();
-    }
-
     static void createAsNewThread(int uid)
     {
       threadList.push_back(std::make_unique<CmdTransferForThread>(uid, false));
@@ -133,6 +132,11 @@ namespace nl
     }
 
   private:
+    static void createThread(CmdTransferForThread* a)
+    {
+      a->doMainLoop();
+    }
+
     void endThread()
     {
       endThreadFlag = true;

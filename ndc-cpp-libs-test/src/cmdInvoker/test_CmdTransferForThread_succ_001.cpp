@@ -28,10 +28,6 @@ TEST(CmdTransferForThread, append_readNext_case1)
     cmdExeCount++;
   }
 
-
-  //CmdTransferForThread::endThreads();
-  std::cout << "test" << std::endl;
-
   // 1件のコマンドが実行された
   EXPECT_EQ(cmdExeCount, 1);
 }
