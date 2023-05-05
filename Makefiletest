@@ -4,25 +4,19 @@ PJNAME1_TEST=ndc-cpp-libs-test
 PJNAME2=ndc-saaa-cpp-libs
 PJNAME2_TEST=ndc-saaa-cpp-libs-test
 
-OUTDIR=temp
-
 # 共通コマンド
 COPYDIR=XCOPY /T /E
 FIND=C:\01_add\005_dev\020_msys2\tools\msys64\usr\bin\find.exe
-DELETE_RECURSIVELY_WIN=del /Q 
-DELETE_RECURSIVELY_LINUX=rm -rf 
 
 
 # コンパイラとコンパイルオプションの定義
 CC = cl.exe
-#CFLAGS = /c /nologo /EHsc /std:c++17 /JMC /permissive- /GS /W3 /Zc:wchar_t /ZI /Gm- /Od /sdl /Fd"temp\ndc-cpp-libs.pdb" /Zc:inline /fp:precise /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MDd /FC /Fa"temp\"  /Fo"temp\" /Fp"temp\ndc-cpp-libs.pch" /diagnostics:column 
-# CFLAGS = /c /nologo /EHsc /std:c++17 /JMC /permissive- /GS /W3 /Zc:wchar_t /ZI /Gm- /Od /sdl /Fd"temp\\ndc-cpp-libs.pdb" /Zc:inline /fp:precise /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MDd /FC /Fa"temp\\"  /Fp"temp\\ndc-cpp-libs.pch" /diagnostics:column 
-CFLAGS = /c /nologo /EHsc /std:c++17 
+CFLAGS = /c /nologo /EHsc /std:c++17 /JMC /permissive- /GS /W3 /Zc:wchar_t /ZI /Gm- /Od /sdl /Fd"temp\ndc-cpp-libs.pdb" /Zc:inline /fp:precise /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MDd /FC /Fa"temp\"  /Fo"temp\" /Fp"temp\ndc-cpp-libs.pch" /diagnostics:column 
 
 # リンカとリンクオプションの定義
 LIB = C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x86\lib.exe
 LINK = C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x86\link.exe
-LINKPRAM = /subsystem:console /nologo /DEBUG /out:"temp\\ndc-cpp-libs.lib"
+LINKPRAM = /subsystem:console /nologo /DEBUG /out:"temp\ndc-cpp-libs.lib"
 
 SRCDIRS_PJ = ndc-cpp-libs
 OBJDIR = temp
@@ -53,19 +47,20 @@ $(OBJROOT)/%.obj : $(SRCROOT)/%.cpp
 ndc-cpp-libs.lib: $(OBJECTS)
 	@echo "Linking $@ ..."
 	$(LIB) /nologo /out:temp/ndc-cpp-libs.lib $^
+#	$(LINK) /OUT:$@ /nologo $^
 
 clean:
 	@echo "Cleaning up ..."
-	@$(DELETE_RECURSIVELY_LINUX) ./$(OBJDIR)/*.$(OBJEXT)
-	@$(DELETE_RECURSIVELY_LINUX) ./$(OBJDIR)/ndc-cpp-libs.lib
-	@$(DELETE_RECURSIVELY_LINUX) $(OBJDIR)
+	@del /Q $(OBJDIR)\*.$(OBJEXT)
+	@del /Q ndc-cpp-libs.lib
+	@rmdir /Q $(OBJDIR)
 
-debug:
-	@echo $(OBJECTS)
+DEBUG: $(OUTDIR)
+	echo $(OBJECTS)
+	echo $(MKDIR_FOR_PJ)
 
-
-makedir:
-	@mkdir -p $(OUTDIR)
+$(OUTDIR) :
+	@if not exist $(OUTDIR) mkdir $(OUTDIR)
 	$(COPYDIR) $(PJNAME1) $(OUTDIR)
 	$(COPYDIR) $(PJNAME1_TEST) $(OUTDIR)
 	$(COPYDIR) $(PJNAME2) $(OUTDIR)
