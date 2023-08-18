@@ -19,8 +19,10 @@ std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const std::string filename)
 std::unique_ptr<ImageCanvas> BitmapImage::ReadBmp(const char* filename)
 {
   FILE* Bmp_Fp;
-  errno_t err = fopen_s(&Bmp_Fp, filename, "rb"); // バイナリモード読み込み用にオープン
-  if (err != 0) {
+  //errno_t err = fopen_s(&Bmp_Fp, filename, "rb"); // バイナリモード読み込み用にオープン
+  // if (err != 0) {
+  Bmp_Fp = fopen(filename,"rb");
+  if ( Bmp_Fp == NULL ) {
     // ファイル読み込み失敗
     std::stringstream ss;
     ss << "BitmapImage::ReadBmp File Open Failed. File=" << filename;
@@ -112,9 +114,10 @@ void BitmapImage::WriteBmp(const std::string filename,  ImageCanvas &canvas)
 void BitmapImage::WriteBmp(const char *filename,  ImageCanvas& canvas)
 {
   FILE* Out_Fp;
-  errno_t err = fopen_s(&Out_Fp, filename, "wb");
-
-  if (err != 0) {
+  //errno_t err = fopen_s(&Out_Fp, filename, "wb");
+  Out_Fp = fopen(filename, "wb");
+  // if (err != 0) {
+  if ( Out_Fp == NULL ) {
     // ファイル読み込み失敗
     std::stringstream ss;
     ss << "BitmapImage::WriteBmp File open failed as write-mode. File=" << filename;
@@ -175,8 +178,10 @@ void BitmapImage::PrintBmpInfo(const char *filename)
 {
   FILE* Bmp_Fp;
   // バイナリモード読み込み用にオープン
-  errno_t err = fopen_s(&Bmp_Fp, filename, "rb");
-  if (err != 0) {
+  //errno_t err = fopen_s(&Bmp_Fp, filename, "rb");
+  Bmp_Fp = fopen(filename,"rb");
+  if ( Bmp_Fp == NULL ) {
+  // if (err != 0) {
     // ファイル読み込み失敗
     std::stringstream ss;
     ss << "BitmapImage::WriteBmp File open failed as read-mode. File=" << filename;

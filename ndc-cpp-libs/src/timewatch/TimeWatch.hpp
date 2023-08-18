@@ -106,5 +106,16 @@ namespace nl
     /// @brief 現在の時刻を hh:mm:ss.SSS 形式の文字列で返す
     /// @return 現在時刻（hh:mm:ss.SSS）の文字列
     static std::string getNowMsAsStr_hhmmssSSS();
+
+    /// @brief Windows、Linux 環境の両方で利用可能な現在の時刻を取得する関数を定義
+    /// @return なし。パラメータにセットする構造体に対して結果を更新する
+    static void localtime_common(const std::time_t* timer, std::tm* buf) {
+    #if defined(_WIN32) || defined(_WIN64)
+        localtime_s(buf, timer);
+    #else
+        localtime_r(timer, buf);
+    #endif
+    }
+
   };
 };

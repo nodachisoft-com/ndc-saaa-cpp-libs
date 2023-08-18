@@ -152,7 +152,8 @@ std::string TimeWatch::getTimezone()
   auto now = std::chrono::system_clock::now();
   std::time_t time_now_t = std::chrono::system_clock::to_time_t(now);
   std::tm now_tm;
-  errno_t error = localtime_s(&now_tm, &time_now_t);
+  // errno_t error = localtime_s(&now_tm, &time_now_t); // Only for win.
+  TimeWatch::localtime_common(&time_now_t, &now_tm);  // Wrapper for win & linux.
   // std::tm now_tm = *std::localtime(&time_now_t);
   char buf[512];
   std::strftime(buf, 6, "%z", &now_tm);
@@ -164,7 +165,8 @@ std::string TimeWatch::getNowMsAsStrIso8601()
   auto dt = std::chrono::system_clock::now();
   std::time_t time_now_t = std::chrono::system_clock::to_time_t(dt);
   std::tm now_tm;
-  errno_t error = localtime_s(&now_tm,&time_now_t);
+  // errno_t error = localtime_s(&now_tm,&time_now_t); // Only for win
+  TimeWatch::localtime_common(&time_now_t, &now_tm);  // Wrapper for win & linux.
   // std::tm now_tm = *std::localtime(&time_now_t);
   char buf[512];
   std::strftime(buf, 512, "%Y-%m-%dT%H:%M:%S%z", &now_tm);
@@ -177,7 +179,8 @@ std::string TimeWatch::getNowMsAsStr_hhmmssSSS()
   std::time_t now_c = std::chrono::system_clock::to_time_t(now);
   // std::tm *now_tm = std::localtime(&now_c);
   std::tm now_tm;
-  errno_t error = localtime_s(&now_tm, &now_c);
+  // errno_t error = localtime_s(&now_tm, &now_c); // Only for Win.
+  TimeWatch::localtime_common(&now_c, &now_tm);  // Wrapper for win & linux.
 
   std::ostringstream oss;
   oss << std::put_time(&now_tm, "%H:%M:%S.") << std::setfill('0') << std::setw(3) << (now.time_since_epoch() % std::chrono::seconds(1)) / std::chrono::milliseconds(1);

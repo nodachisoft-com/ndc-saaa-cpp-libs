@@ -1,0 +1,93 @@
+# 共通設定
+PJNAME1=ndc-cpp-libs
+PJNAME1_TEST=ndc-cpp-libs-test
+PJNAME2=ndc-saaa-cpp-libs
+PJNAME2_TEST=ndc-saaa-cpp-libs-test
+PJNAME_GTEST=gtest_portable
+
+
+# 共通コマンド
+COPYDIR=cp -r 
+FIND=/usr/bin/find
+
+# 一時出力先
+OUTDIR=temp
+
+# コンパイラとコンパイルオプションの定義
+CC = clang++
+# CFLAGS = /c /nologo /EHsc /std:c++17 /JMC /permissive- /GS /W3 /Zc:wchar_t /ZI /Gm- /Od /sdl /Fd"temp\ndc-cpp-libs.pdb" /Zc:inline /fp:precise /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MDd /FC /Fa"temp\"  /Fo"temp\" /Fp"temp\ndc-cpp-libs.pch" /diagnostics:column 
+CFLAGS = -pthread -std=c++17 -I/usr/include/sys -I/usr/local/include
+
+# リンカとリンクオプションの定義
+#LIB = C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x86\lib.exe
+#LINK = C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x86\link.exe
+#LINKPRAM = /subsystem:console /nologo /DEBUG /out:"temp\ndc-cpp-libs.lib"
+LIB = clang++
+LIBFLAGS = -pthread -std=stdlib++
+
+SRCDIRS_PJ = ndc-cpp-libs ndc-cpp-libs-test gtest_portable
+OBJDIR = temp
+
+
+
+# コンパイル対象のソースコード拡張子、コンパイル後の拡張子を定義
+SRCEXT = cpp
+OBJEXT = obj
+
+# コンパイル出力先・gtest実行ファイル出力先
+OBJROOT=temp
+SRCROOT=.
+
+SRCDIRS = $(shell $(FIND) $(SRCDIRS_PJ) -type d)   # ソースコードのパス一覧を取得
+SOURCES := $(foreach dir,$(SRCDIRS),$(wildcard $(dir)/*.$(SRCEXT)))  # ソースコードファイル一覧を取得
+
+OBJSRCS = $(SOURCES:$(SRCROOT)/%=%)  # コンパイル先のパス一覧を取得
+OBJECTS = $(addprefix $(OBJROOT)/, $(OBJSRCS:.cpp=.obj))	# コンパイル先のファイル名を生成
+
+#SOURCES := $(foreach dir,$(SRCDIRS),$(wildcard $(dir)/*.$(SRCEXT)))
+#OBJECTS := $(patsubst %.$(SRCEXT),$(OBJDIR)/%.$(OBJEXT),$(SOURCES))
+
+# ndc-cpp-libs の gtest 実行ファイル出力先
+NDC-CPP-LIBS-GTEST-EXEC-DIR=./$(OUTDIR)/ndc-cpp-libs-test-exec/
+NDC-CPP-LIBS-GTEST-EXEC=$(NDC-CPP-LIBS-GTEST-EXEC-DIR)/ndc-cpp-libs-gtest.out
+
+
+all: $(NDC-CPP-LIBS-GTEST-EXEC)
+
+# ソースコードのコンパイルを実施
+#$(OBJDIR)/%.$(OBJEXT): %.$(SRCEXT)
+$(OBJROOT)/%.obj : $(SRCROOT)/%.cpp
+	@echo "Compiling $< ..."
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+# コンパイル済みオブジェクトをリンクし、gtest による実行可能ファイルを作成
+$(NDC-CPP-LIBS-GTEST-EXEC): $(OBJECTS)
+	@echo "Linking $@ ..."
+	@mkdir -p $(NDC-CPP-LIBS-GTEST-EXEC-DIR)
+	$(LIB) $(LIBFLAGS) -o $(NDC-CPP-LIBS-GTEST-EXEC) $^
+#	$(LIB) /nologo /out:temp/ndc-cpp-libs.lib $^
+#	$(LINK) /OUT:$@ /nologo $^
+
+run-ndc-cpp-libs-gtest : $(NDC-CPP-LIBS-GTEST-EXEC)
+	@echo "========= RUN TEST OF ndc-cpp-libs =============="
+	cd $(NDC-CPP-LIBS-GTEST-EXEC-DIR) && pwd && ./ndc-cpp-libs-gtest.out
+
+clean:
+	@echo "Cleaning up ..."
+	@del /Q $(OBJDIR)\*.$(OBJEXT)
+	@del /Q ndc-cpp-libs.lib
+	@rmdir /Q $(OBJDIR)
+
+DEBUG: $(OUTDIR)
+	echo $(OBJECTS)
+	echo $(MKDIR_FOR_PJ)
+
+# 全部のリソース（ヘッダーやデータファイル含む）をコンパイル用にコピーする（現在使用していない）
+$(OUTDIR) :
+	@mkdir -p $(OUTDIR)
+	$(COPYDIR) $(PJNAME1) $(OUTDIR)
+	$(COPYDIR) $(PJNAME1_TEST) $(OUTDIR)
+	$(COPYDIR) $(PJNAME2) $(OUTDIR)
+	$(COPYDIR) $(PJNAME2_TEST) $(OUTDIR)
+	$(COPYDIR) $(PJNAME_GTEST) $(OUTDIR)

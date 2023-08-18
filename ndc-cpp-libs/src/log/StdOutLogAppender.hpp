@@ -39,7 +39,11 @@ namespace nl
     {
       char buf[64];
       // sprintf(buf, "38;2;%d;%d;%d", fontColor.r, fontColor.g, fontColor.b);
-      sprintf_s(buf, sizeof(buf), "38;2;%d;%d;%d", fontColor.r, fontColor.g, fontColor.b);
+      // sprintf_s(buf, sizeof(buf), "38;2;%d;%d;%d", fontColor.r, fontColor.g, fontColor.b);  // For Windows C Only
+      
+      // replace for C++
+      std::sprintf(buf, "38;2;%d;%d;%d", fontColor.r, fontColor.g, fontColor.b);
+      std::cout << buf << std::endl;
       escSeq(buf, 'm');
     }
 

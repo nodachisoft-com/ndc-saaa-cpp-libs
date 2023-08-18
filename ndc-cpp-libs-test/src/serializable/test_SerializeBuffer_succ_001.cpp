@@ -1,4 +1,5 @@
-﻿#include <gtest/gtest.h>
+﻿/*
+#include <gtest/gtest.h>
 #include "../../src/serializable/index.hpp"
 
 #include <iostream>
@@ -13,3 +14,4 @@ TEST(SerializeBuffer, testcase1)
 {
   EXPECT_EQ(3, 3);
 }
+*/

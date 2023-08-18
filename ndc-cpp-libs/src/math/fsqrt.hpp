@@ -10,7 +10,7 @@ namespace nl
   ///  float が 4 バイトという前提で実行可能。
   ///  ただし、c++標準ライブラリの std::sqrt は十分高速であり、使用する意味はほぼない
   ///  fsqrt : sqrt の実行速度は 2:3 程度
-  static constexpr float fastsqrt(const float &x)
+  static float fastsqrt(const float &x)
   {
     float xHalf = 0.5f * x;
     int tmp = 0x5F3759DF - (*(int *)&x >> 1);

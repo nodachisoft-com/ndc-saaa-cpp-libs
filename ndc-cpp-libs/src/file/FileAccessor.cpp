@@ -56,8 +56,10 @@ bool FileAccessor::readFileSync()
 
   long READ_BLOCK_LENGTH = 16;
   FILE* fp;
-  errno_t err = fopen_s(&fp, filePath.c_str(), "rb");
-  if (err != 0) {
+  fp = fopen(filePath.c_str(),"rb");
+  //errno_t err = fopen_s(&fp, filePath.c_str(), "rb"); // for windows only
+  //if (err != 0) {
+  if ( fp == NULL ) {
       // ファイルオープンエラーの処理
       return false;
   }
@@ -109,8 +111,10 @@ bool FileAccessor::readFileSync()
 bool FileAccessor::writeFileSync()
 {
   FILE* fp;
-  errno_t err = fopen_s(&fp, filePath.c_str(), "wb");
-  if (err != 0) {
+  fp = fopen(filePath.c_str(), "wb");
+  //errno_t err = fopen_s(&fp, filePath.c_str(), "wb");
+  //if (err != 0) {
+  if ( fp == NULL) {
     // ファイルオープンエラーの処理
     return false;
   }
@@ -178,8 +182,10 @@ bool FileAccessor::appendStringToFileSync(const std::string filepath, const std:
 
   // 文字列追記処理を行う間、保持される FILE へのハンドラ
   FILE* appendWriteFp;
-  errno_t err = fopen_s(&appendWriteFp, filepath.c_str(), "ab");
-  if (err != 0) {
+  appendWriteFp = fopen( filepath.c_str(), "ab");
+  //errno_t err = fopen_s(&appendWriteFp, filepath.c_str(), "ab");
+  // if (err != 0) {
+  if ( appendWriteFp == NULL ) {
     // ファイルオープンエラーの処理
     return false;
   }
