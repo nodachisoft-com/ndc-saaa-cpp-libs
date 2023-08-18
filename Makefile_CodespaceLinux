@@ -28,8 +28,6 @@ LIBFLAGS = -pthread -std=stdlib++
 SRCDIRS_PJ = ndc-cpp-libs ndc-cpp-libs-test gtest_portable
 OBJDIR = temp
 
-
-
 # コンパイル対象のソースコード拡張子、コンパイル後の拡張子を定義
 SRCEXT = cpp
 OBJEXT = obj
@@ -69,7 +67,7 @@ $(NDC-CPP-LIBS-GTEST-EXEC): $(OBJECTS)
 #	$(LIB) /nologo /out:temp/ndc-cpp-libs.lib $^
 #	$(LINK) /OUT:$@ /nologo $^
 
-run-ndc-cpp-libs-gtest : $(NDC-CPP-LIBS-GTEST-EXEC)
+test : $(NDC-CPP-LIBS-GTEST-EXEC)
 	@echo "========= RUN TEST OF ndc-cpp-libs =============="
 	cd $(NDC-CPP-LIBS-GTEST-EXEC-DIR) && pwd && ./ndc-cpp-libs-gtest.out
 

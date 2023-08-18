@@ -19,7 +19,7 @@ CC = cl.exe
 # CFLAGS = /c /nologo /EHsc /std:c++17 /JMC /permissive- /GS /W3 /Zc:wchar_t /ZI /Gm- /Od /sdl /Fd"temp\\ndc-cpp-libs.pdb" /Zc:inline /fp:precise /D "_DEBUG" /D "_LIB" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MDd /FC /Fa"temp\\"  /Fp"temp\\ndc-cpp-libs.pch" /diagnostics:column 
 CFLAGS = /c /nologo /EHsc /std:c++17 
 
-# リンカとリンクオプションの定義
+# リンカとリンクオプションの定義( Windows 用 )
 LIB = C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x86\lib.exe
 LINK = C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x86\link.exe
 LINKPRAM = /subsystem:console /nologo /DEBUG /out:"temp\\ndc-cpp-libs.lib"

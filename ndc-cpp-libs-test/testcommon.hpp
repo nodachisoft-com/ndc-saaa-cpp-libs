@@ -3,5 +3,6 @@
 
 // デバッグ用ディレクトリを設定（Project からのルート設定）
 // const std::string TESTTMP_DIR("./debug/");
-const std::string TESTTMP_DIR(".\\");
+//const std::string TESTTMP_DIR(".\\"); // for windows
+const std::string TESTTMP_DIR("./");
 
