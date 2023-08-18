@@ -25,7 +25,7 @@ CFLAGS = -pthread -std=c++17 -I/usr/include/sys -I/usr/local/include
 LIB = clang++
 LIBFLAGS = -pthread -std=stdlib++
 
-SRCDIRS_PJ = ndc-cpp-libs ndc-cpp-libs-test gtest_portable
+SRCDIRS_PJ = gtest_portable ndc-cpp-libs ndc-cpp-libs-test ndc-saaa-cpp-libs ndc-saaa-cpp-libs-test
 OBJDIR = temp
 
 # コンパイル対象のソースコード拡張子、コンパイル後の拡張子を定義
@@ -49,6 +49,9 @@ OBJECTS = $(addprefix $(OBJROOT)/, $(OBJSRCS:.cpp=.obj))	# コンパイル先の
 NDC-CPP-LIBS-GTEST-EXEC-DIR=./$(OUTDIR)/ndc-cpp-libs-test-exec/
 NDC-CPP-LIBS-GTEST-EXEC=$(NDC-CPP-LIBS-GTEST-EXEC-DIR)/ndc-cpp-libs-gtest.out
 
+# ndc-saaa-cpp-libs の gtest 実行ファイル出力先(TODO: こちらも Make に組み込めるようにする！まだ宣言しただけ。)
+NDC-SAAA-CPP-LIBS-GTEST-EXEC-DIR=./$(OUTDIR)/ndc-saaa-cpp-libs-test-exec/
+NDC-SAAA-CPP-LIBS-GTEST-EXEC=$(NDC-SAAA-CPP-LIBS-GTEST-EXEC-DIR)/ndc-saaa-cpp-libs-gtest.out
 
 all: $(NDC-CPP-LIBS-GTEST-EXEC)
 
